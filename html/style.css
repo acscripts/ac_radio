@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@600&display=swap');
+@font-face {
+	font-family: 'Technology';
+	src: url('assets/Technology.ttf');
+}
+
+
+
+.wrapper {
+	display: none;
+	user-select: none;
+}
+
+.container {
+	display: flex;
+	align-items: flex-end;
+	position: fixed;
+	height: 100%;
+	right: 2rem;
+	bottom: 0;
+}
+
+.radio-image {
+	height: 50%;
+}
+
+
+
+/* Action buttons */
+/* Top row */
+.button-join {
+	/* background: blue;
+	opacity: .1; */
+
+	cursor: pointer;
+	position: absolute;
+	padding: 13%;
+	right: 68%;
+	bottom: 30%;
+}
+
+.button-button-preset-set {
+	/* background: cyan;
+	opacity: .1; */
+
+	cursor: pointer;
+	position: absolute;
+	padding: 7% 12%;
+	right: 39.8%;
+	bottom: 29%;
+}
+
+/* First column */
+.button-leave {
+	/* background: pink;
+	opacity: .1; */
+
+	cursor: pointer;
+	position: absolute;
+	padding: 9%;
+	right: 63%;
+	bottom: 6.8%;
+}
+
+.button-volume-mute {
+	/* background: purple;
+	opacity: .1; */
+
+	cursor: pointer;
+	position: absolute;
+	padding: 9%;
+	right: 63%;
+	bottom: 2.8%;
+}
+
+/* Middle column */
+.button-volume-up {
+	/* background: lime;
+	opacity: .1; */
+
+	cursor: pointer;
+	position: absolute;
+	padding: 9%;
+	right: 44%;
+	bottom: 6.8%;
+}
+
+.button-volume-down {
+	/* background: green;
+	opacity: .1; */
+
+	cursor: pointer;
+	position: absolute;
+	padding: 9%;
+	right: 44%;
+	bottom: 2.8%;
+}
+
+/* Last buttons */
+.button-preset-one {
+	/* background: orange;
+	opacity: .1; */
+
+	cursor: pointer;
+	position: absolute;
+	padding: 9%;
+	right: 25%;
+	bottom: 6.8%;
+}
+
+.button-preset-two {
+	/* background: red;
+	opacity: .1; */
+
+	cursor: pointer;
+	position: absolute;
+	padding: 9%;
+	right: 25%;
+	bottom: 2.8%;
+}
+
+
+
+/* Input */
+.text-input {
+	position: absolute;
+	width: 48%;
+	height: 7.1%;
+	right: 28%;
+	bottom: 13.8%;
+}
+
+.text-input input {
+	height: 100%;
+	width: 90%;
+	padding: 0;
+	outline: none;
+	border: none;
+	padding-left: 10%;
+
+	appearance: none;
+	background: #8b9c60;
+	border-radius: 5px;
+	color: #21381e;
+	font-family: 'Technology';
+	font-size: 2rem;
+}
+
+.text-input input::placeholder {
+	color: #5b6938;
+}
+
+
+
+/* Button tooltips */
+.radio-button:before {
+	position: absolute;
+	content: attr(data-hint);
+	opacity: 0;
+
+	transition: all .3s;
+	padding: 10%;
+	border-radius: 3px;
+	font-family: 'Rubik', sans-serif;
+	font-weight: 600;
+	font-size: .8rem;
+	color: #2d2427;
+}
+
+.radio-button:hover:before {
+	opacity: 1;
+	background: #eee;
+}
+
+[data-hint]:not([data-dummy]):before {
+	pointer-events: none;
+}
