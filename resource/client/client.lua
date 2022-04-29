@@ -180,6 +180,8 @@ RegisterNetEvent('ac_radio:openRadio', openRadio)
 
 AddEventHandler('onResourceStop', function(resource)
 	if resource == GetCurrentResourceName() then
+		removeRadioProp()
+		leaveRadio()
 		if uiOpened then
 			SetNuiFocus(false, false)
 			SetNuiFocusKeepInput(false)
