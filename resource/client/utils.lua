@@ -103,6 +103,17 @@ end
 
 exports('leaveRadio', leaveRadio)
 
+-- Send config data to NUI
+RegisterNUICallback('loaded', function()
+	SendNUIMessage({
+		action = 'setup',
+		config = {
+			max = ac.maximumFrequencies,
+			step = ac.frequencyStep
+		}
+	})
+end)
+
 -- Yoinked from http://lua-users.org/wiki/SimpleRound
 function round(num, decimal)
 	local mult = 10^(decimal or 0)

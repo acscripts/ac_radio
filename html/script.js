@@ -8,7 +8,21 @@ const sendNuiEvent = (name, data, callback) => {
 
 // Event listeners
 window.addEventListener('message', function(event) {
-	if (event.data.action == 'open') $('.wrapper').fadeIn();
+	const data = event.data;
+	if (data.action == 'open') {
+		$('.wrapper').fadeIn();
+	} else if (data.action == 'setup') {
+		$('#radio-channel').attr({
+			max: data.config.max,
+			placeholder: data.config.max,
+			min: data.config.step,
+			step: data.config.step
+		});
+	}
+});
+
+window.addEventListener('load', function() {
+	sendNuiEvent('loaded');
 });
 
 window.addEventListener('keyup', function(e) {
