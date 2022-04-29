@@ -10,7 +10,7 @@ repository 'https://github.com/antond15/ac_radio'
 
 
 shared_script 'config.lua'
-server_scripts 'resource/server/*.lua' }
+server_scripts { 'resource/server/*.lua' }
 client_scripts { 'resource/client/*.lua' }
 
 ui_page 'html/index.html'
