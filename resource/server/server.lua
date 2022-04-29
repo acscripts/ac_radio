@@ -19,7 +19,3 @@ if not ac.useCommand then
 		end
 	end)
 end
-
-
-end
-
