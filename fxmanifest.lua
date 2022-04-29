@@ -2,9 +2,11 @@ fx_version 'cerulean'
 game 'gta5'
 lua54 'yes'
 
+name 'ac_radio'
 author 'ANTOND.#8507'
-description 'FiveM radio for pma-voice'
 version '1.0.0'
+description 'FiveM radio for pma-voice'
+repository 'https://github.com/antond15/ac_radio'
 
 
 server_script 'resource/server.lua'
@@ -15,7 +17,6 @@ client_scripts {
   'resource/client.lua'
 }
 
-
 ui_page 'html/index.html'
 
 files {
@@ -25,3 +26,6 @@ files {
   'html/assets/technology.ttf',
   'html/assets/radio.png'
 }
+
+
+dependency 'pma-voice'
