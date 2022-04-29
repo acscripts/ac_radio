@@ -7,12 +7,6 @@ ac = {
 		Whether to use command for opening the radio UI.
 		If set to 'false', you need to do some additional steps to set up the item in your inventory system.
 		You can find guides for the most popular inventories/frameworks in the 'docs' folder.
-
-		Event usage (client or server, just use TriggerClientEvent):
-			TriggerEvent('ac_radio:openRadio')
-
-		Export usage (client only):
-			exports.ac_radio:openRadio()
 	]]
 	useCommand = true,
 
@@ -24,5 +18,37 @@ ac = {
 		Leave it empty if you don't want a default keybind.
 		Set it to 'false' if you want do disable keybind for the command.
 	]]
-	commandKey = ''
+	commandKey = '',
+
+	-- Number of available frequencies
+	maximumFrequencies = 1000,
+
+	-- How much the frequency value can change per step (5.23, 5.24, 5.25)
+	frequencyStep = 0.01,
+
+	--[[
+		Channel restrictions use the following format. The term 'group' is the same as 'job'.
+
+		For single group:
+			[frequency] = 'group'
+		Each frequency from base '1' will be restricted to group 'police' (everyone with group 'police' can access it).
+			[1] = 'police'
+
+		For multiple groups and grades:
+			[frequency] = {
+				group = grade
+			}
+		Each frequency from base '1' will be restricted to groups 'police' (grade below 3 can't access it) and 'fbi' (everyone with group 'fbi' can access it).
+			[2] = {
+				police = 3,
+				fbi = 0
+			}
+	]]
+	restrictedChannels = {
+		[1] = 'police',
+		[2] = {
+			police = 3,
+			fbi = 0
+		}
+	}
 }

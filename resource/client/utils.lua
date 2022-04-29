@@ -95,9 +95,22 @@ function requestAnimDict(dict)
 	end
 end
 
+-- Disconnets player from the radio
 function leaveRadio()
 	exports['pma-voice']:removePlayerFromRadio()
 	exports['pma-voice']:setVoiceProperty('radioEnabled', false)
 end
 
 exports('leaveRadio', leaveRadio)
+
+-- Yoinked from http://lua-users.org/wiki/SimpleRound
+function round(num, decimal)
+	local mult = 10^(decimal or 0)
+	return math.floor(num * mult + 0.5) / mult
+end
+
+do
+	local step = tostring(ac.frequencyStep)
+	local pos = step:find('%.')
+	ac.decimalStep = #step:sub(pos + 1)
+end

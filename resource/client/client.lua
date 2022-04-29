@@ -37,10 +37,9 @@ end
 
 local function joinRadio(channel)
 	if not channel then return end
-	channel = tonumber(channel)
+	channel = round(tonumber(channel), ac.decimalStep)
 
-	-- TODO: restricted frequencies and config option for maximum frequency (and send it to nui)
-	if channel <= 1000 and channel > 0 then
+	if channel <= ac.maximumFrequencies and channel > 0 then
 		exports['pma-voice']:setVoiceProperty('radioEnabled', true)
 		exports['pma-voice']:setRadioChannel(channel)
 		notify('success', ('Joined to frequency %s MHz'):format(channel))
