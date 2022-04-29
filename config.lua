@@ -5,8 +5,8 @@ ac = {
 
 	--[[
 		Whether to use command for opening the radio UI.
-		If set to 'false', you need to connect the event/export with your own inventory system.
-		You can find prepared item structure for 'ox_inventory' in 'OX.md' file.
+		If set to 'false', you need to do some additional steps to set up the item in your inventory system.
+		You can find guides for the most popular inventories/frameworks in the 'docs' folder.
 
 		Event usage (client or server, just use TriggerClientEvent):
 			TriggerEvent('ac_radio:openRadio')

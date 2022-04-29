@@ -6,10 +6,15 @@ author 'ANTOND.#8507'
 description 'FiveM radio for pma-voice'
 version '1.0.0'
 
+
+server_script 'resource/server.lua'
+
 client_scripts {
   'config.lua',
-  'resource/*.lua'
+  'resource/utils.lua',
+  'resource/client.lua'
 }
+
 
 ui_page 'html/index.html'
 
