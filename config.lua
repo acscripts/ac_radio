@@ -9,12 +9,10 @@ ac = {
 		You can find prepared item structure for 'ox_inventory' in 'OX.md' file.
 
 		Event usage (client or server, just use TriggerClientEvent):
-			TriggerEvent('ac_radio:toggleUi', true)			Shows the UI
-			TriggerEvent('ac_radio:toggleUi', false)		Hides the UI
+			TriggerEvent('ac_radio:openRadio')
 
 		Export usage (client only):
-			exports.ac_radio:toggleUi(true)					Shows the UI
-			exports.ac_radio:toggleUi(false)				Hides the UI
+			exports.ac_radio:openRadio()
 	]]
 	useCommand = true,
 

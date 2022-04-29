@@ -78,8 +78,7 @@ RegisterNUICallback('join', function(data)
 end)
 
 RegisterNUICallback('leave', function()
-	exports['pma-voice']:removePlayerFromRadio()
-	exports['pma-voice']:setVoiceProperty('radioEnabled', false)
+	leaveRadio()
 	notify('success', 'You\'ve disconnected from the radio')
 end)
 
@@ -176,6 +175,9 @@ RegisterCommand('radio:clear', function()
 	for i=1, 2 do DeleteResourceKvp('ac_radio:preset_'..i) end
 	notify('success', 'Radio presets cleared')
 end)
+
+exports('openRadio', openRadio)
+RegisterNetEvent('ac_radio:openRadio', openRadio)
 
 AddEventHandler('onResourceStop', function(resource)
 	if resource == GetCurrentResourceName() then

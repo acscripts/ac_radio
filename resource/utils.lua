@@ -94,3 +94,10 @@ function requestAnimDict(dict)
 		Wait(0)
 	end
 end
+
+function leaveRadio()
+	exports['pma-voice']:removePlayerFromRadio()
+	exports['pma-voice']:setVoiceProperty('radioEnabled', false)
+end
+
+exports('leaveRadio', leaveRadio)
