@@ -54,7 +54,6 @@ end
 
 -- NUI callbacks
 RegisterNUICallback('close', function()
-	uiOpened = false
 	setNuiFocusAdvanced(false, false)
 
 	if presetFreq then
@@ -72,6 +71,7 @@ RegisterNUICallback('close', function()
 	RemoveAnimDict(dict)
 
 	removeRadioProp()
+	uiOpened = false
 end)
 
 RegisterNUICallback('join', function(data)
