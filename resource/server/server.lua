@@ -10,7 +10,7 @@ server = {
 if not ac.useCommand then
 	CreateThread(function()
 		if hasResource('ox_inventory') then
-			return -- Stop when using ox_inventory as it should be registered manually (see docs/ox.md)
+			return -- Stop when using ox_inventory as it should be registered manually (see docs/items/ox.md)
 		elseif server.framework == 'esx' then
 			local ESX = exports.es_extended:getSharedObject()
 			ESX.RegisterUsableItem('radio', function(playerId)

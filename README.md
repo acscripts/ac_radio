@@ -9,7 +9,7 @@ Supported frameworks are [es_extended](https://github.com/esx-framework/esx-lega
 
 - Two available channel presents customisable by player
 - Channel frequency restrictions for groups/jobs
-- Usable item for [ox_inventory](https://github.com/overextended/ox_inventory) and any ESX / QB inventory (see [docs](./docs))
+- Usable item for [ox_inventory](https://github.com/overextended/ox_inventory) and any ESX / QB inventory (see [docs](./docs/items))
 - Variable frequency limit and step between them
 - Add your own notification system easily
 - Detailed config explanation

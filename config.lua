@@ -9,7 +9,7 @@ ac = {
 	--[[
 		Whether to use command for opening the radio UI.
 		If set to 'false', you need to do some additional steps to set up the item in your inventory system.
-		You can find guides for the most popular inventories/frameworks in the 'docs' folder.
+		You can find guides for the most popular inventories/frameworks in the 'docs/items' folder.
 	]]
 	useCommand = true,
 
