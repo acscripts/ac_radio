@@ -7,10 +7,12 @@ local uiOpened = false
 
 -- Functions
 local function openRadio()
+	if uiOpened then return end
+	uiOpened = true
+
 	setNuiFocusAdvanced(true, true)
 	SetCursorLocation(0.917, 0.873)
 	SendNUIMessage({ action = 'open' })
-	uiOpened = true
 
 	-- Disarms the player when using the radio. Only for ox_inventory.
 	TriggerEvent('ox_inventory:disarm')
@@ -52,8 +54,8 @@ end
 
 -- NUI callbacks
 RegisterNUICallback('close', function()
-	setNuiFocusAdvanced(false, false)
 	uiOpened = false
+	setNuiFocusAdvanced(false, false)
 
 	if presetFreq then
 		presetFreq = nil
