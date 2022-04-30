@@ -82,12 +82,13 @@ RegisterNUICallback('leave', function()
 end)
 
 RegisterNUICallback('volume_up', function()
+	local volume = volumeState and volumeState * 0.01 or exports['pma-voice']:getRadioVolume()
+
 	if volumeState then
 		volumeState = nil
 		notify('inform', 'Radio unmuted', 1000)
 	end
 
-	local volume = exports['pma-voice']:getRadioVolume()
 	if volume <= 0.9 then
 		local newVolume = math.floor((volume + 0.1) * 100)
 		exports['pma-voice']:setRadioVolume(newVolume)
@@ -98,12 +99,13 @@ RegisterNUICallback('volume_up', function()
 end)
 
 RegisterNUICallback('volume_down', function()
+	local volume = volumeState and volumeState * 0.01 or exports['pma-voice']:getRadioVolume()
+
 	if volumeState then
 		volumeState = nil
 		notify('inform', 'Radio unmuted', 1000)
 	end
 
-	local volume = exports['pma-voice']:getRadioVolume()
 	if volume >= 0.2 then
 		local newVolume = math.floor((volume - 0.1) * 100)
 		exports['pma-voice']:setRadioVolume(newVolume)
