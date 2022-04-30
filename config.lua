@@ -31,22 +31,22 @@ ac = {
 
 		For single group:
 			[frequency] = 'group'
-		Each frequency from base '1' will be restricted to group 'police' (everyone with group 'police' can access it).
+		Frequency '1' will be restricted to group 'police' (everyone with group 'police' can access it).
 			[1] = 'police'
 
 		For multiple groups and grades:
 			[frequency] = {
 				group = grade
 			}
-		Each frequency from base '1' will be restricted to groups 'police' (grade below 3 can't access it) and 'fbi' (everyone with group 'fbi' can access it).
-			[2] = {
+		Frequency '1.1' will be restricted to groups 'police' (grade below 3 can't access it) and 'fbi' (everyone with group 'fbi' can access it).
+			[1.1] = {
 				police = 3,
 				fbi = 0
 			}
 	]]
 	restrictedChannels = {
 		[1] = 'police',
-		[2] = {
+		[1.1] = {
 			police = 3,
 			fbi = 0
 		}
