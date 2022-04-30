@@ -13,7 +13,8 @@ shared_script 'config.lua'
 
 server_scripts {
   'resource/server/server.lua',
-  'resource/server/players.lua'
+  'resource/server/players.lua',
+  'resource/server/version.lua'
 }
 
 client_scripts {

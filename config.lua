@@ -1,4 +1,7 @@
 ac = {
+	-- Whether to check for newer resource version and notify in server console.
+	versionCheck = true,
+
 	-- Whether to use custom notification function located in top of the 'resource/client/utils.lua' file.
 	-- If set to 'true', the default custom notification system is from 'ox_lib' resource.
 	useCustomNotify = false,
