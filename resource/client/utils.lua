@@ -123,5 +123,5 @@ end
 do
 	local step = tostring(ac.frequencyStep)
 	local pos = step:find('%.')
-	ac.decimalStep = #step:sub(pos + 1)
+	ac.decimalStep = pos and #step:sub(pos + 1) or 0
 end
