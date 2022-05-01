@@ -24,9 +24,10 @@ if server.framework == 'esx' then
 -- qb-core
 elseif server.framework == 'qb' then
 	AddEventHandler('QBCore:Server:PlayerLoaded', function(qbPlayer)
-		onLoaded(source)
+		local source = qbPlayer.PlayerData.source
 		local job = qbPlayer.PlayerData.job
-		server.players[qbPlayer.PlayerData.source] = { [job.name] = job.grade.level }
+		onLoaded(source)
+		server.players[source] = { [job.name] = job.grade.level }
 	end)
 
 	AddEventHandler('QBCore:Server:OnJobUpdate', function(source, job)
