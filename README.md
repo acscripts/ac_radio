@@ -17,6 +17,7 @@ Supported frameworks are [es_extended](https://github.com/esx-framework/esx-lega
 - Buttons for complete volume control (up, down, mute)
 - Choose between command and usable item
 - Configurable key mapping for command
+- Support for custom locales
 
 ### Start order
 
