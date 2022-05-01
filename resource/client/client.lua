@@ -44,9 +44,9 @@ local function joinRadio(channel)
 	if channel <= ac.maximumFrequencies and channel > 0 then
 		exports['pma-voice']:setVoiceProperty('radioEnabled', true)
 		exports['pma-voice']:setRadioChannel(channel)
-		notify('success', ('Joined to frequency %s MHz'):format(channel))
+		notify('success', locale('channel_join', channel))
 	else
-		notify('error', 'This frequency is unavailable')
+		notify('error', locale('channel_unavailable'))
 	end
 end
 
@@ -80,7 +80,7 @@ end)
 
 RegisterNUICallback('leave', function()
 	leaveRadio()
-	notify('success', 'You\'ve disconnected from the radio')
+	notify('success', locale('channel_disconnect'))
 end)
 
 RegisterNUICallback('volume_up', function()
@@ -88,15 +88,15 @@ RegisterNUICallback('volume_up', function()
 
 	if volumeState then
 		volumeState = nil
-		notify('inform', 'Radio unmuted', 1000)
+		notify('inform', locale('volume_unmute'), 1000)
 	end
 
 	if volume <= 0.9 then
 		local newVolume = math.floor((volume + 0.1) * 100)
 		exports['pma-voice']:setRadioVolume(newVolume)
-		notify('inform', ('Volume increased to %s%%'):format(newVolume), 1500, 'volume-high')
+		notify('inform', locale('volume_up', newVolume), 1500, 'volume-high')
 	else
-		notify('error', 'Maximum volume reached', 2500)
+		notify('error', locale('volume_max'), 2500)
 	end
 end)
 
@@ -105,15 +105,15 @@ RegisterNUICallback('volume_down', function()
 
 	if volumeState then
 		volumeState = nil
-		notify('inform', 'Radio unmuted', 1000)
+		notify('inform', locale('volume_unmute'), 1000)
 	end
 
 	if volume >= 0.2 then
 		local newVolume = math.floor((volume - 0.1) * 100)
 		exports['pma-voice']:setRadioVolume(newVolume)
-		notify('inform', ('Volume reduced to %s%%'):format(newVolume), 1500, 'volume-low')
+		notify('inform', locale('volume_down', newVolume), 1500, 'volume-low')
 	else
-		notify('error', 'Minimum volume reached', 2500)
+		notify('error', locale('volume_min'), 2500)
 	end
 end)
 
@@ -121,11 +121,11 @@ RegisterNUICallback('volume_mute', function()
 	if volumeState then
 		exports['pma-voice']:setRadioVolume(volumeState)
 		volumeState = nil
-		notify('success', 'Radio unmuted', 5000, 'volume-high')
+		notify('success', locale('volume_unmute'), 5000, 'volume-high')
 	else
 		volumeState = math.floor(exports['pma-voice']:getRadioVolume() * 100)
 		exports['pma-voice']:setRadioVolume(0)
-		notify('error', 'Radio muted', 5000, 'volume-xmark')
+		notify('error', locale('volume_mute'), 5000, 'volume-xmark')
 	end
 end)
 
@@ -136,13 +136,13 @@ RegisterNUICallback('preset_join', function(data, cb)
 		joinRadio(preset)
 		cb(preset)
 	else
-		notify('error', 'No saved preset found')
+		notify('error', locale('preset_not_found'))
 	end
 end)
 
 RegisterNUICallback('preset_request', function(data)
 	if data?.channel then
-		notify('inform', 'Choose a preset (1 or 2) to save the current frequency on.', 10000)
+		notify('inform', locale('preset_choose'), 10000)
 		presetFreq = data.channel
 	end
 end)
@@ -151,10 +151,10 @@ RegisterNUICallback('preset_set', function(data)
 	if not presetFreq then return end
 
 	if not data?.preset then
-		notify('error', 'Invalid frequency')
+		notify('error', locale('preset_invalid'))
 	else
 		SetResourceKvp('ac_radio:preset_'.. data.preset, presetFreq)
-		notify('success', ('You\'ve set the preset to %s MHz'):format(presetFreq))
+		notify('success', locale('preset_set', presetFreq))
 		presetFreq = nil
 	end
 end)
@@ -163,20 +163,20 @@ end)
 
 -- Commands and handlers
 if ac.useCommand then
-	TriggerEvent('chat:addSuggestion', '/radio', 'Opens the radio UI')
+	TriggerEvent('chat:addSuggestion', '/radio', locale('command_open'))
 	RegisterCommand('radio', function()
 		openRadio()
 	end)
 
 	if ac.commandKey then
-		RegisterKeyMapping('radio', 'Open radio UI', 'keyboard', ac.commandKey)
+		RegisterKeyMapping('radio', locale('keymap_open'), 'keyboard', ac.commandKey)
 	end
 end
 
-TriggerEvent('chat:addSuggestion', '/radio:clear', 'Clears all your frequency presets')
+TriggerEvent('chat:addSuggestion', '/radio:clear', locale('command_clear'))
 RegisterCommand('radio:clear', function()
 	for i=1, 2 do DeleteResourceKvp('ac_radio:preset_'..i) end
-	notify('success', 'Radio presets cleared')
+	notify('success', locale('preset_clear'))
 end)
 
 exports('openRadio', openRadio)

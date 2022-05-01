@@ -9,7 +9,10 @@ description 'FiveM radio for pma-voice'
 repository 'https://github.com/antond15/ac_radio'
 
 
-shared_script 'config.lua'
+shared_scripts {
+  'config.lua',
+  'resource/locales.lua'
+}
 
 server_scripts {
   'resource/server/server.lua',
@@ -25,6 +28,7 @@ client_scripts {
 ui_page 'html/index.html'
 
 files {
+  'locales/*.lua',
   'html/index.html',
   'html/style.css',
   'html/script.js',

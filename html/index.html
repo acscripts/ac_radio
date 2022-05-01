@@ -4,6 +4,7 @@
 		<meta charset='UTF-8'>
 		<meta http-equiv='X-UA-Compatible' content='IE=edge'>
 		<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+		<title></title>
 
 		<script src='nui://game/ui/jquery.js'></script>
 		<script src='script.js'></script>
@@ -14,19 +15,19 @@
 		<div class='wrapper'>
 			<div class='container'>
 				<img class='radio-image' src='assets/radio.png'>
-				<div class='button-join radio-button' onclick='toggleRadio(true)' data-hint='Join to frequency'></div>
-				<div class='button-button-preset-set radio-button' onclick='setPreset()' data-hint='Set preset'></div>
+				<div class='button' id='join' onclick='toggleRadio(true)' tooltip='Join to frequency'></div>
+				<div class='button' id='preset_set' onclick='setPreset()' tooltip='Set preset'></div>
 
-				<div class='button-leave radio-button' onclick='toggleRadio()' data-hint='Turn off'></div>
-				<div class='button-volume-mute radio-button' onclick='changeVolume("mute")' data-hint='Mute'></div>
+				<div class='button' id='leave' onclick='toggleRadio()' tooltip='Turn off'></div>
+				<div class='button' id='volume_mute' onclick='changeVolume("mute")' tooltip='Mute'></div>
 
-				<div class='button-volume-up radio-button' onclick='changeVolume("up")' data-hint='Volume up'></div>
-				<div class='button-volume-down radio-button' onclick='changeVolume("down")' data-hint='Volume down'></div>
+				<div class='button' id='volume_up' onclick='changeVolume("up")' tooltip='Volume up'></div>
+				<div class='button' id='volume_down' onclick='changeVolume("down")' tooltip='Volume down'></div>
 
-				<div class='button-preset-one radio-button' onclick='presetChannel(1)' data-hint='Preset #1'></div>
-				<div class='button-preset-two radio-button' onclick='presetChannel(2)' data-hint='Preset #2'></div>
+				<div class='button' id='preset_one' onclick='presetChannel(1)' tooltip='Preset #1'></div>
+				<div class='button' id='preset_two' onclick='presetChannel(2)' tooltip='Preset #2'></div>
 
-				<div class='text-input'>
+				<div class='channel-input'>
 					<input id='radio-channel' type='number' value='' min='0.01' max ='1000' step='0.01' placeholder='1000'>
 				</div>
 			</div>

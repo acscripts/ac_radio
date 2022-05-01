@@ -4,6 +4,7 @@ In this file you can find more detailed description of each config option.
 <details>
 <summary><b>Quick navigation</b></summary>
 
+- [locale](#locale)
 - [versionCheck](#versioncheck)
 - [useCustomNotify](#usecustomnotify)
 - [useCommand](#usecommand)
@@ -14,6 +15,17 @@ In this file you can find more detailed description of each config option.
 </details>
 
 <br>
+
+## locale
+What supported language to use for notifications and UI.  
+Locale name is the same as the file name in [locales](../locales) folder without the `.lua` extension (eg. **en**, **cs**).  
+Note that some character sets may not be supported when using the default notifications (eg. `ěčřůďťň`).  
+Feel free to submit a PR with more languages!
+
+**Accepted values**  
+`'en'` = Or any other locale.
+
+
 
 ## versionCheck
 Whether to check for newer resource version and notify in server console.

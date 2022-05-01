@@ -103,13 +103,21 @@ end
 
 exports('leaveRadio', leaveRadio)
 
--- Send config data to NUI
+-- Send setup data to NUI
 RegisterNUICallback('loaded', function()
+	local uiLocales = {}
+	for k,v in pairs(locales) do
+		if k:find('ui_') then
+			uiLocales[k] = v
+		end
+	end
+
 	SendNUIMessage({
 		action = 'setup',
 		config = {
 			max = ac.maximumFrequencies,
-			step = ac.frequencyStep
+			step = ac.frequencyStep,
+			locales = uiLocales
 		}
 	})
 end)

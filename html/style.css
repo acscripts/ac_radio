@@ -28,7 +28,7 @@
 
 /* Action buttons */
 /* Top row */
-.button-join {
+#join {
 	/* background: blue;
 	opacity: .1; */
 
@@ -39,7 +39,7 @@
 	bottom: 30%;
 }
 
-.button-button-preset-set {
+#preset_set {
 	/* background: cyan;
 	opacity: .1; */
 
@@ -51,7 +51,7 @@
 }
 
 /* First column */
-.button-leave {
+#leave {
 	/* background: pink;
 	opacity: .1; */
 
@@ -62,7 +62,7 @@
 	bottom: 6.8%;
 }
 
-.button-volume-mute {
+#volume_mute {
 	/* background: purple;
 	opacity: .1; */
 
@@ -74,7 +74,7 @@
 }
 
 /* Middle column */
-.button-volume-up {
+#volume_up {
 	/* background: lime;
 	opacity: .1; */
 
@@ -85,7 +85,7 @@
 	bottom: 6.8%;
 }
 
-.button-volume-down {
+#volume_down {
 	/* background: green;
 	opacity: .1; */
 
@@ -97,7 +97,7 @@
 }
 
 /* Last buttons */
-.button-preset-one {
+#preset_one {
 	/* background: orange;
 	opacity: .1; */
 
@@ -108,7 +108,7 @@
 	bottom: 6.8%;
 }
 
-.button-preset-two {
+#preset_two {
 	/* background: red;
 	opacity: .1; */
 
@@ -122,7 +122,7 @@
 
 
 /* Input */
-.text-input {
+.channel-input {
 	position: absolute;
 	width: 48%;
 	height: 7.1%;
@@ -130,7 +130,7 @@
 	bottom: 13.8%;
 }
 
-.text-input input {
+.channel-input input {
 	height: 100%;
 	width: 90%;
 	padding: 0;
@@ -146,16 +146,16 @@
 	font-size: 2rem;
 }
 
-.text-input input::placeholder {
+.channel-input input::placeholder {
 	color: #5b6938;
 }
 
 
 
 /* Button tooltips */
-.radio-button:before {
+.button:before {
 	position: absolute;
-	content: attr(data-hint);
+	content: attr(tooltip);
 	opacity: 0;
 
 	transition: all .3s;
@@ -165,13 +165,14 @@
 	font-weight: 600;
 	font-size: .8rem;
 	color: #2d2427;
+	white-space: nowrap;
 }
 
-.radio-button:hover:before {
+.button:hover:before {
 	opacity: 1;
 	background: #eee;
 }
 
-[data-hint]:not([data-dummy]):before {
+[tooltip]:not([dummy]):before {
 	pointer-events: none;
 }

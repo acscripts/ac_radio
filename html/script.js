@@ -18,6 +18,10 @@ window.addEventListener('message', function(event) {
 			min: data.config.step,
 			step: data.config.step
 		});
+
+		for (const [key, value] of Object.entries(data.config.locales)) {
+			$(`#${key.slice(3)}`).attr('tooltip', value);
+		}
 	}
 });
 
