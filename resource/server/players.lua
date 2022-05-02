@@ -1,4 +1,6 @@
-server.players = {}
+local function playerLoaded(source)
+	server.voice:setPlayerRadio(source, 0)
+end
 
 AddEventHandler('playerDropped', function()
 	if server.players[source] then
@@ -6,47 +8,58 @@ AddEventHandler('playerDropped', function()
 	end
 end)
 
-local function onLoaded(source)
-	exports['pma-voice']:setPlayerRadio(source, 0)
-end
-
 -- es_extended
-if server.framework == 'esx' then
-	AddEventHandler('esx:playerLoaded', function(source, xPlayer)
-		onLoaded(source)
-		server.players[source] = { [xPlayer.job.name] = xPlayer.job.grade }
+if server.core == 'esx' then
+	AddEventHandler('esx:playerLoaded', function(source, player)
+		server.players[source] = { [player.job.name] = player.job.grade }
+		playerLoaded(source)
 	end)
 
 	AddEventHandler('esx:setJob', function(source, job)
 		server.players[source] = { [job.name] = job.grade }
 	end)
 
+	for _, player in pairs(server.getPlayers()) do
+		server.players[player.source] = { [player.job.name] = player.job.grade }
+	end
+
+
 -- qb-core
-elseif server.framework == 'qb' then
-	AddEventHandler('QBCore:Server:PlayerLoaded', function(qbPlayer)
-		local source = qbPlayer.PlayerData.source
-		local job = qbPlayer.PlayerData.job
-		onLoaded(source)
-		server.players[source] = { [job.name] = job.grade.level }
+elseif server.core == 'qb' then
+	AddEventHandler('QBCore:Server:PlayerLoaded', function(player)
+		player = player.PlayerData
+		server.players[player.source] = { [player.job.name] = player.job.grade.level }
+		playerLoaded(player.source)
 	end)
 
 	AddEventHandler('QBCore:Server:OnJobUpdate', function(source, job)
 		server.players[source] = { [job.name] = job.grade.level }
 	end)
 
+	for _, player in pairs(server.getPlayers()) do
+		player = player.PlayerData
+		server.players[player.source] = { [player.job.name] = player.job.grade.level }
+	end
+
+
 -- ox_core
-elseif server.framework == 'ox' then
+elseif server.core == 'ox' then
+	local ox = exports.ox_core
+
 	AddEventHandler('ox:playerLoaded', function(source)
-		onLoaded(source)
-		server.players[source] = exports.ox_core:CPlayer('getGroups', source)
+		server.players[source] = ox:CPlayer('getGroups', source)
+		playerLoaded(source)
 	end)
 
 	AddEventHandler('ox_groups:setGroup', function(source, group, rank)
-		local groups = server.players[source]
-		if groups then
-			groups[group] = rank
+		if server.players[source] then
+			server.players[source][group] = rank
 		else
 			server.players[source] = { [group] = rank }
 		end
 	end)
+
+	for _, player in pairs(ox:getPlayers()) do
+		server.players[player.source] = ox:CPlayer('getGroups', player.source)
+	end
 end
