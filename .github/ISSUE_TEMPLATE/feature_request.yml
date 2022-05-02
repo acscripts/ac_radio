@@ -1,0 +1,28 @@
+name: Feature request
+description: Suggest an idea for this project.
+title: "Enhancement: "
+labels: enhancement
+assignees:
+  - antond15
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this feature request!
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Feature description
+      description: A clear and concise description of what you want to be added.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reason
+    attributes:
+      label: Reason
+      description: The reason of why you want this to be added.
+    validations:
+      required: true
