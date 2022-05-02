@@ -95,14 +95,6 @@ function requestAnimDict(dict)
 	end
 end
 
--- Disconnets player from the radio
-function leaveRadio()
-	exports['pma-voice']:removePlayerFromRadio()
-	exports['pma-voice']:setVoiceProperty('radioEnabled', false)
-end
-
-exports('leaveRadio', leaveRadio)
-
 -- Send setup data to NUI
 RegisterNUICallback('loaded', function()
 	local uiLocales = {}

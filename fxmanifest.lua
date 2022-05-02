@@ -4,8 +4,8 @@ lua54 'yes'
 
 name 'ac_radio'
 author 'ANTOND.#8507'
-version '1.0.3'
-description 'FiveM radio for pma-voice'
+version '1.0.4'
+description 'A framework-standalone radio UI for FiveM'
 repository 'https://github.com/antond15/ac_radio'
 
 

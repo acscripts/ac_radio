@@ -2,6 +2,7 @@ local presetFreq = nil
 local radioProp = nil
 local volumeState = nil
 local uiOpened = false
+local voice = exports['pma-voice']
 
 
 
@@ -42,13 +43,19 @@ local function joinRadio(channel)
 	channel = round(tonumber(channel), ac.decimalStep)
 
 	if channel <= ac.maximumFrequencies and channel > 0 then
-		exports['pma-voice']:setVoiceProperty('radioEnabled', true)
-		exports['pma-voice']:setRadioChannel(channel)
+		voice:setVoiceProperty('radioEnabled', true)
+		voice:setRadioChannel(channel)
 		notify('success', locale('channel_join', channel))
 	else
 		notify('error', locale('channel_unavailable'))
 	end
 end
+
+local function leaveRadio()
+	voice:removePlayerFromRadio()
+	voice:setVoiceProperty('radioEnabled', false)
+end
+
 
 
 
@@ -84,7 +91,7 @@ RegisterNUICallback('leave', function()
 end)
 
 RegisterNUICallback('volume_up', function()
-	local volume = volumeState and volumeState * 0.01 or exports['pma-voice']:getRadioVolume()
+	local volume = volumeState and volumeState * 0.01 or voice:getRadioVolume()
 
 	if volumeState then
 		volumeState = nil
@@ -93,7 +100,7 @@ RegisterNUICallback('volume_up', function()
 
 	if volume <= 0.9 then
 		local newVolume = math.floor((volume + 0.1) * 100)
-		exports['pma-voice']:setRadioVolume(newVolume)
+		voice:setRadioVolume(newVolume)
 		notify('inform', locale('volume_up', newVolume), 1500, 'volume-high')
 	else
 		notify('error', locale('volume_max'), 2500)
@@ -101,7 +108,7 @@ RegisterNUICallback('volume_up', function()
 end)
 
 RegisterNUICallback('volume_down', function()
-	local volume = volumeState and volumeState * 0.01 or exports['pma-voice']:getRadioVolume()
+	local volume = volumeState and volumeState * 0.01 or voice:getRadioVolume()
 
 	if volumeState then
 		volumeState = nil
@@ -110,7 +117,7 @@ RegisterNUICallback('volume_down', function()
 
 	if volume >= 0.2 then
 		local newVolume = math.floor((volume - 0.1) * 100)
-		exports['pma-voice']:setRadioVolume(newVolume)
+		voice:setRadioVolume(newVolume)
 		notify('inform', locale('volume_down', newVolume), 1500, 'volume-low')
 	else
 		notify('error', locale('volume_min'), 2500)
@@ -119,12 +126,12 @@ end)
 
 RegisterNUICallback('volume_mute', function()
 	if volumeState then
-		exports['pma-voice']:setRadioVolume(volumeState)
+		voice:setRadioVolume(volumeState)
 		volumeState = nil
 		notify('success', locale('volume_unmute'), 5000, 'volume-high')
 	else
-		volumeState = math.floor(exports['pma-voice']:getRadioVolume() * 100)
-		exports['pma-voice']:setRadioVolume(0)
+		volumeState = math.floor(voice:getRadioVolume() * 100)
+		voice:setRadioVolume(0)
 		notify('error', locale('volume_mute'), 5000, 'volume-xmark')
 	end
 end)
@@ -179,8 +186,9 @@ RegisterCommand('radio:clear', function()
 	notify('success', locale('preset_clear'))
 end)
 
-exports('openRadio', openRadio)
 RegisterNetEvent('ac_radio:openRadio', openRadio)
+exports('openRadio', openRadio)
+exports('leaveRadio', leaveRadio)
 
 AddEventHandler('onResourceStop', function(resource)
 	if resource == GetCurrentResourceName() then
