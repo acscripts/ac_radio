@@ -96,8 +96,8 @@ If set to `0.01`, available frequencies will be **32.56**, **32.57**, **32.58** 
 
 ## restrictedChannels
 ###### In the following text, the term "group" has the same meaning as "job".
-Restricts certain channel frequencies for given groups.  
-If set to `0.01`, available frequencies will be **32.56**, **32.57**, **32.58** etc. Can be an integer as well.
+Restricts certain channel frequencies for given groups and grades.  
+Each specific frequency must be listed separately.
 
 **Accepted values**  
 Table of any amount of frequencies
@@ -107,27 +107,27 @@ Table of any amount of frequencies
 
 -- Single group with grade
 [frequency] = {
-	group = grade
+    group = grade
 }
 
 -- Multiple groups
 [frequency] = {
-	group1 = grade1,
-	group2 = grade2,
-	group3 = grade3
+    group1 = grade1,
+    group2 = grade2,
+    group3 = grade3
 }
 ```
 
 **Example config data**
 ```lua
 restrictedChannels = {
-	[1] = {
-		police = 5,			-- Everyone with group "police" and grade >=5 can access 1 MHz
-		ambulance = 7,		-- Everyone with group "ambulance" and grade >=7 can access 1 MHz
-		fbi = 0				-- Everyone with group "fbi" can access 1 MHz
-	},
-	[1.1] = 'police',		-- Everyone with group "police" can access 1.1 MHz
-	[1.2] = 'ambulance',	-- Everyone with group "ambulance" can access 1.2 MHz
-	[1.3] = 'fbi'			-- Everyone with group "fbi" can access 1.3 MHz
+    [1] = {
+        police = 5,         -- Everyone with group "police" and grade >=5 can access 1 MHz
+        ambulance = 7,      -- Everyone with group "ambulance" and grade >=7 can access 1 MHz
+        fbi = 0             -- Everyone with group "fbi" can access 1 MHz
+    },
+    [1.1] = 'police',       -- Everyone with group "police" can access 1.1 MHz
+    [1.2] = 'ambulance',    -- Everyone with group "ambulance" can access 1.2 MHz
+    [1.3] = 'fbi'           -- Everyone with group "fbi" can access 1.3 MHz
 }
 ```
