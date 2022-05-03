@@ -1,5 +1,4 @@
 ### Introduction
-
 ac_radio is a framework-standalone user interface for radio control. The only dependency is [pma-voice](https://github.com/AvarianKnight/pma-voice) system.
 
 You can use any supported framework to enable additional features such as usable item or restrictions.  
@@ -8,7 +7,6 @@ Supported frameworks are [es_extended](https://github.com/esx-framework/esx-lega
 Report bugs using [GitHub issues](https://github.com/antond15/ac_radio/issues). Use the official [Discord server](https://discord.gg/2ZezMw2xvR) for support.
 
 ### Features
-
 - Two available channel presents customisable by player
 - Channel frequency restrictions for groups/jobs
 - Usable item for [ox_inventory](https://github.com/overextended/ox_inventory) and any ESX / QB inventory (see [docs](./docs/items))
@@ -21,12 +19,10 @@ Report bugs using [GitHub issues](https://github.com/antond15/ac_radio/issues). 
 - Configurable key mapping for command
 - Support for custom locales
 
-### Start order
-
-Make sure to start this resource after **pma-voice** and any **supported framework**, if you use it.
+### Common issues
+Possible solutions can be found [here](./docs/common_issues.md).
 
 ### Preview
-
 https://streamable.com/dyp4w6
 
 <img src='https://cdn.dejv.it/files/github/radio_preview.png' alt='radio preview' height='300' />
