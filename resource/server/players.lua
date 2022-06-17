@@ -47,11 +47,11 @@ elseif server.core == 'ox' then
 	local ox = exports.ox_core
 
 	AddEventHandler('ox:playerLoaded', function(source)
-		server.players[source] = ox:CPlayer('getGroups', source)
+		server.players[source] = ox:GetPlayer(source).groups
 		playerLoaded(source)
 	end)
 
-	AddEventHandler('ox_groups:setGroup', function(source, group, rank)
+	AddEventHandler('ox:setGroup', function(source, group, rank)
 		if server.players[source] then
 			server.players[source][group] = rank
 		else
@@ -59,7 +59,7 @@ elseif server.core == 'ox' then
 		end
 	end)
 
-	for _, player in pairs(ox:getPlayers()) do
-		server.players[player.source] = ox:CPlayer('getGroups', player.source)
+	for _, player in pairs(ox:GetPlayers()) do
+		server.players[player.source] = ox:GetPlayer(player.source).groups
 	end
 end
