@@ -35,7 +35,7 @@ end
 
 -- Group check yoinked from https://github.com/overextended/ox_inventory/blob/3112665275a10815a610a5cbd382518e7efe55e8/modules/bridge/server.lua#L1
 for frequency, allowed in pairs(ac.restrictedChannels) do
-	server.voice:addChannelCheck(frequency, function(source)
+	server.voice:addChannelCheck(tonumber(frequency), function(source)
 		local groups = server.players[source]
 		if not groups then return false end
 
