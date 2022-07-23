@@ -27,5 +27,16 @@ ac = {
 	-- Channel frequency restrictions.
 	restrictedChannels = {
 		[1] = 'police'
-	}
+	},
+
+	-- ! The following options will override the pma-voice convars.
+	-- Whether to enable radio submix (voice sounds like on real radio).
+	radioEffect = true,
+
+	-- Whether to enable animation while talking on radio.
+	radioAnimation = true,
+
+	-- Default keybind for talking on radio.
+	radioKey = 'LMENU',
+
 }

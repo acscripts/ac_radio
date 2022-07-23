@@ -55,3 +55,10 @@ for frequency, allowed in pairs(ac.restrictedChannels) do
 		return false
     end)
 end
+
+
+
+SetConvarReplicated('voice_useNativeAudio', tostring(ac.radioEffect))
+SetConvarReplicated('voice_enableSubmix', ac.radioEffect and '1' or '0')
+SetConvarReplicated('voice_enableRadioAnim', ac.radioAnimation and '1' or '0')
+SetConvarReplicated('voice_defaultRadio', ac.radioKey)

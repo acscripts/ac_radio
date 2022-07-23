@@ -1,5 +1,6 @@
 # Config explanation
-In this file you can find more detailed description of each config option.
+In this file you can find more detailed description of each config option.  
+Options marked with ✏ symbol automatically overrides the pma-voice convars.
 
 <details>
 <summary><b>Quick navigation</b></summary>
@@ -12,6 +13,9 @@ In this file you can find more detailed description of each config option.
 - [maximumFrequencies](#maximumfrequencies)
 - [frequencyStep](#frequencystep)
 - [restrictedChannels](#restrictedchannels)
+- [radioAnimation](#radioAnimation)
+- [radioEffect](#radioEffect)
+- [radioKey](#radioKey)
 </details>
 
 <br>
@@ -131,3 +135,32 @@ restrictedChannels = {
     [1.3] = 'fbi'           -- Everyone with group "fbi" can access 1.3 MHz
 }
 ```
+
+
+
+## radioEffect ✏
+Whether to enable radio submix effect.  
+Overrides `voice_useNativeAudio` and `voice_enableSubmix`.
+
+**Accepted values**  
+`true` = People on radio will sound like on real-life radio.  
+`false` = No additional voice submix will be applied.
+
+
+
+## radioAnimation ✏
+Whether to enable animation while talking on radio.  
+Overrides `voice_enableRadioAnim`.
+
+**Accepted values**  
+`true` = Your hand will be placed on shoulder while talking on radio.  
+`false` = Nothing will happen.
+
+
+
+## radioKey ✏
+Whether to enable animation while talking on radio.  
+Overrides `voice_defaultRadio`.
+
+**Accepted values**  
+`'LMENU'` = Or any other [valid key](https://docs.fivem.net/docs/game-references/input-mapper-parameter-ids/keyboard) to create a keybind with **this** default key.
