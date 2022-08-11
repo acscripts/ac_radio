@@ -18,6 +18,9 @@ ac = {
 	-- Default keybind for the '/radio' command.
 	commandKey = '',
 
+	-- Whether to disconnect from radio when there is no radio item in player's inventory.
+	noRadioDisconnect = true,
+
 	-- Number of available frequencies.
 	maximumFrequencies = 1000,
 

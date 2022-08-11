@@ -12,7 +12,7 @@ Add the following snippet to `ox_inventory/data/items.lua`. The item image is al
 		export = 'ac_radio.openRadio',
 		remove = function(total)
 			-- Disconnets a player from the radio when all his radio items are removed.
-			if total < 1 then
+			if total < 1 and GetConvar('radio_noRadioDisconnect', 'true') == 'true' then
 				exports.ac_radio:leaveRadio()
 			end
 		end

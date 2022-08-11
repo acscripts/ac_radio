@@ -10,6 +10,7 @@ Options marked with ✏ symbol automatically overrides the pma-voice convars.
 - [useCustomNotify](#usecustomnotify)
 - [useCommand](#usecommand)
 - [commandKey](#commandkey)
+- [noRadioDisconnect](#noRadioDisconnect)
 - [maximumFrequencies](#maximumfrequencies)
 - [frequencyStep](#frequencystep)
 - [restrictedChannels](#restrictedchannels)
@@ -77,6 +78,15 @@ Default keybind for the radio command. Use only if the option above (**useComman
 `false` = The keybind will not be created at all.  
 `''` = Empty quotes for creating the keybind, but not setting a default key.   
 `'NUMPAD0'` = Or any other [valid key](https://docs.fivem.net/docs/game-references/input-mapper-parameter-ids/keyboard) to create a keybind with **this** default key.
+
+
+
+## noRadioDisconnect
+Whether to disconnect from radio when there is no radio item in player's inventory.  
+
+**Accepted values**  
+`true` = You will be disconnected from radio when there is no radio item in your inventory.  
+`false` = You won't.
 
 
 

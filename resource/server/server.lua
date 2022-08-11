@@ -19,12 +19,14 @@ if server.core == 'esx' then
 			TriggerClientEvent('ac_radio:openRadio', source)
 		end)
 
-		AddEventHandler('esx:onRemoveInventoryItem', function(source, name, count)
-			if name == 'radio' and count == 0 then
-				TriggerClientEvent('ac_radio:disableRadio', source)
-				server.voice:setPlayerRadio(source, 0)
-			end
-		end)
+		if ac.noRadioDisconnect then
+			AddEventHandler('esx:onRemoveInventoryItem', function(source, name, count)
+				if name == 'radio' and count < 1 then
+					TriggerClientEvent('ac_radio:disableRadio', source)
+					server.voice:setPlayerRadio(source, 0)
+				end
+			end)
+		end
 	end
 
 elseif server.core == 'qb' then
@@ -65,6 +67,7 @@ end
 
 
 
+SetConvarReplicated('radio_noRadioDisconnect', tostring(ac.noRadioDisconnect))
 SetConvarReplicated('voice_useNativeAudio', tostring(ac.radioEffect))
 SetConvarReplicated('voice_enableSubmix', ac.radioEffect and '1' or '0')
 SetConvarReplicated('voice_enableRadioAnim', ac.radioAnimation and '1' or '0')
