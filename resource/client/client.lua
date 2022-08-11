@@ -186,6 +186,10 @@ RegisterCommand('radio:clear', function()
 	notify('success', locale('preset_clear'))
 end)
 
+RegisterNetEvent('ac_radio:disableRadio', function()
+	voice:setVoiceProperty('radioEnabled', false)
+end)
+
 RegisterNetEvent('ac_radio:openRadio', openRadio)
 exports('openRadio', openRadio)
 exports('leaveRadio', leaveRadio)

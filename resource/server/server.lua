@@ -18,6 +18,13 @@ if server.core == 'esx' then
 		ESX.RegisterUsableItem('radio', function(source)
 			TriggerClientEvent('ac_radio:openRadio', source)
 		end)
+
+		AddEventHandler('esx:onRemoveInventoryItem', function(source, name, count)
+			if name == 'radio' and count == 0 then
+				TriggerClientEvent('ac_radio:disableRadio', source)
+				server.voice:setPlayerRadio(source, 0)
+			end
+		end)
 	end
 
 elseif server.core == 'qb' then
