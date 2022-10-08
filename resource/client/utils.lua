@@ -28,6 +28,8 @@ local typeColors = {
 	['error'] = 130
 }
 
+---@param type string
+---@param text string
 local function defaultNotify(type, text)
 	BeginTextCommandThefeedPost('STRING')
 	AddTextComponentSubstringPlayerName(text)
@@ -72,6 +74,7 @@ function setNuiFocusAdvanced(focus, cursor)
 	end
 end
 
+---@param ped number
 ---@return string dict
 function getRadioDict(ped)
 	return IsPedInAnyVehicle(ped, false) and 'cellphone@in_car@ds' or 'cellphone@'
@@ -115,6 +118,8 @@ RegisterNUICallback('loaded', function()
 end)
 
 -- Yoinked from http://lua-users.org/wiki/SimpleRound
+---@param num number
+---@param decimal number
 function round(num, decimal)
 	local mult = 10^(decimal or 0)
 	return math.floor(num * mult + 0.5) / mult

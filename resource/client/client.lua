@@ -1,12 +1,11 @@
-local presetFreq = nil
-local radioProp = nil
-local volumeState = nil
+local presetFreq = nil ---@type number | nil
+local radioProp = nil ---@type number | nil
+local volumeState = nil ---@type number | nil
 local uiOpened = false
 local voice = exports['pma-voice']
 
 
 
--- Functions
 local function openRadio()
 	if uiOpened then return end
 	uiOpened = true
@@ -19,7 +18,7 @@ local function openRadio()
 	TriggerEvent('ox_inventory:disarm')
 
 	local model = `prop_cs_hand_radio`
-	requestModel(model)
+	requestModel(model --[[@as number]])
 	radioProp = CreateObject(model, 0.0, 0.0, 0.0, true, true, true)
 	local ped = PlayerPedId()
 	AttachEntityToEntity(radioProp, ped, GetPedBoneIndex(ped, 28422), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, true, true, false, true, 0, true)
@@ -33,14 +32,15 @@ end
 
 local function removeRadioProp()
 	if not radioProp then return end
-	DetachEntity(radioProp)
+	DetachEntity(radioProp, false, false)
 	DeleteEntity(radioProp)
 	radioProp = nil
 end
 
+---@param channel number?
 local function joinRadio(channel)
 	if not channel then return end
-	channel = round(tonumber(channel), ac.decimalStep)
+	channel = round(channel, ac.decimalStep)
 
 	if channel <= ac.maximumFrequencies and channel > 0 then
 		voice:setVoiceProperty('radioEnabled', true)
@@ -58,8 +58,12 @@ end
 
 
 
+---@class ChannelData
+---@field channel number
 
--- NUI callbacks
+---@class PresetData
+---@field preset number
+
 RegisterNUICallback('close', function()
 	setNuiFocusAdvanced(false, false)
 
@@ -81,6 +85,7 @@ RegisterNUICallback('close', function()
 	uiOpened = false
 end)
 
+---@param data ChannelData
 RegisterNUICallback('join', function(data)
 	joinRadio(data?.channel)
 end)
@@ -136,9 +141,11 @@ RegisterNUICallback('volume_mute', function()
 	end
 end)
 
+---@param data PresetData
+---@param cb fun(preset: number)
 RegisterNUICallback('preset_join', function(data, cb)
 	if not data?.preset then return end
-	local preset = GetResourceKvpString('ac_radio:preset_'.. data.preset)
+	local preset = tonumber(GetResourceKvpString('ac_radio:preset_'.. data.preset))
 	if preset then
 		joinRadio(preset)
 		cb(preset)
@@ -147,6 +154,7 @@ RegisterNUICallback('preset_join', function(data, cb)
 	end
 end)
 
+---@param data ChannelData
 RegisterNUICallback('preset_request', function(data)
 	if data?.channel then
 		notify('inform', locale('preset_choose'), 10000)
@@ -154,13 +162,14 @@ RegisterNUICallback('preset_request', function(data)
 	end
 end)
 
+---@param data PresetData
 RegisterNUICallback('preset_set', function(data)
 	if not presetFreq then return end
 
 	if not data?.preset then
 		notify('error', locale('preset_invalid'))
 	else
-		SetResourceKvp('ac_radio:preset_'.. data.preset, presetFreq)
+		SetResourceKvp('ac_radio:preset_'.. data.preset, presetFreq --[[@as string]])
 		notify('success', locale('preset_set', presetFreq))
 		presetFreq = nil
 	end
@@ -168,12 +177,11 @@ end)
 
 
 
--- Commands and handlers
 if ac.useCommand then
 	TriggerEvent('chat:addSuggestion', '/radio', locale('command_open'))
 	RegisterCommand('radio', function()
 		openRadio()
-	end)
+	end, false)
 
 	if ac.commandKey then
 		RegisterKeyMapping('radio', locale('keymap_open'), 'keyboard', ac.commandKey)
@@ -184,7 +192,7 @@ TriggerEvent('chat:addSuggestion', '/radio:clear', locale('command_clear'))
 RegisterCommand('radio:clear', function()
 	for i=1, 2 do DeleteResourceKvp('ac_radio:preset_'..i) end
 	notify('success', locale('preset_clear'))
-end)
+end, false)
 
 RegisterNetEvent('ac_radio:disableRadio', function()
 	voice:setVoiceProperty('radioEnabled', false)

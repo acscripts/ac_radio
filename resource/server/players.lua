@@ -1,3 +1,4 @@
+---@param source number
 local function playerLoaded(source)
 	server.voice:setPlayerRadio(source, 0)
 end
