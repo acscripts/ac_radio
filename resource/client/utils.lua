@@ -50,25 +50,24 @@ function notify(type, text, duration, icon)
 end
 
 local focused = false
----@param focus boolean
----@param cursor boolean
-function setNuiFocusAdvanced(focus, cursor)
-	SetNuiFocus(focus, cursor)
-	SetNuiFocusKeepInput(focus)
-	focused = focus
+---@param state boolean
+function setNuiFocus(state)
+	SetNuiFocus(state, state)
+	SetNuiFocusKeepInput(state)
+	focused = state
 
 	if focused then
 		CreateThread(function()
 			while focused do
 				Wait(5)
 				DisableAllControlActions(0)
-				EnableControlAction(0, 21, true)
-				EnableControlAction(0, 22, true)
-				EnableControlAction(0, 30, true)
-				EnableControlAction(0, 31, true)
-				EnableControlAction(0, 59, true)
-				EnableControlAction(0, 71, true)
-				EnableControlAction(0, 72, true)
+				EnableControlAction(0, 21, true) -- INPUT_SPRINT
+				EnableControlAction(0, 22, true) -- INPUT_JUMP
+				EnableControlAction(0, 30, true) -- INPUT_MOVE_LR
+				EnableControlAction(0, 31, true) -- INPUT_MOVE_UD
+				EnableControlAction(0, 59, true) -- INPUT_VEH_MOVE_LR
+				EnableControlAction(0, 71, true) -- INPUT_VEH_ACCELERATE
+				EnableControlAction(0, 72, true) -- INPUT_VEH_BRAKE
 			end
 		end)
 	end

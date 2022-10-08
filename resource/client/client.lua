@@ -10,7 +10,7 @@ local function openRadio()
 	if uiOpened then return end
 	uiOpened = true
 
-	setNuiFocusAdvanced(true, true)
+	setNuiFocus(true)
 	SetCursorLocation(0.917, 0.873)
 	SendNUIMessage({ action = 'open' })
 
@@ -65,7 +65,7 @@ end
 ---@field preset number
 
 RegisterNUICallback('close', function()
-	setNuiFocusAdvanced(false, false)
+	setNuiFocus(false)
 
 	if presetFreq then
 		presetFreq = nil
