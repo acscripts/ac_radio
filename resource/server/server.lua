@@ -64,7 +64,7 @@ for frequency, allowed in pairs(ac.restrictedChannels) do
 		end
 
 		return false
-    end)
+	end)
 end
 
 
