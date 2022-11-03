@@ -23,6 +23,6 @@ Report bugs using [GitHub issues](https://github.com/antond15/ac_radio/issues). 
 Possible solutions can be found [here](./docs/common_issues.md).
 
 ### Preview
-https://streamable.com/dyp4w6
+https://youtu.be/9zxbDJMhVSw
 
 <img src='https://raw.githubusercontent.com/antond15/antond15/main/assets/radio_preview.png' alt='radio preview' height='300' />
