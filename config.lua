@@ -1,5 +1,5 @@
 ---------------------------------------------------------------------------------------------
--- More detailed description of each config option can be found in 'docs/config.md' file.
+-- More detailed description of each config option can be found here: https://docs.dejv.it/ac_radio.
 ---------------------------------------------------------------------------------------------
 
 ac = {
