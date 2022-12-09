@@ -7,7 +7,7 @@ if ac.versionCheck then
 	end
 
 	SetTimeout(1000, function()
-		PerformHttpRequest('https://api.github.com/repos/antond15/ac_radio/releases/latest', function(status, response)
+		PerformHttpRequest('https://api.github.com/repos/acscripts/ac_radio/releases/latest', function(status, response)
 			if status ~= 200 then return end
 
 			response = json.decode(response)
