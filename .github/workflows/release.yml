@@ -1,0 +1,37 @@
+name: Create new release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  new-release:
+    name: Create new release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get latest code
+        uses: actions/checkout@v3
+
+      - name: Update tag
+        uses: EndBug/latest-tag@v1.5.0
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Install zip
+        run: sudo apt install zip
+
+      - name: Bundle files
+        run: |
+          mkdir -p ./temp/ac_radio
+          cp ./{LICENSE,README.md,fxmanifest.lua,config.lua} ./temp/ac_radio
+          cp -r ./{html,locales,resource} ./temp/ac_radio
+          cd ./temp && zip -r ../ac_radio.zip ./ac_radio
+
+      - name: Create release
+        uses: marvinpinto/action-automatic-releases@v1.2.1
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          prerelease: false
+          files: ac_radio.zip
