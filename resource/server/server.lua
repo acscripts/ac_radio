@@ -16,7 +16,7 @@ if server.core == 'esx' then
 	local ESX = exports.es_extended:getSharedObject()
 	server.getPlayers = ESX.GetExtendedPlayers
 
-	if not ac.useCommand and not hasResource('ox_inventory') then
+	if not ac.useCommand and hasResource('ox_inventory') then
 		ESX.RegisterUsableItem('radio', function(source)
 			TriggerClientEvent('ac_radio:openRadio', source)
 		end)
