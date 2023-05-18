@@ -1,5 +1,5 @@
 return {
-	['ui_join'] = "Joindre à la fréquence	",
+	['ui_join'] = "Joindre à la fréquence",
 	['ui_leave'] = 'Éteindre',
 	['ui_preset_set'] = "Définir le préréglage",
 	['ui_preset_one'] = "Préréglage #1",
@@ -18,14 +18,14 @@ return {
 
 	['volume_mute'] = "Sons mute",
 	['volume_unmute'] = "Sons demute",
-	['volume_up'] = "Volume augmenté à	%s%%",
-	['volume_down'] = "Volume réduit à	%s%%",
+	['volume_up'] = "Volume augmenté à %s%%",
+	['volume_down'] = "Volume réduit à %s%%",
 	['volume_max'] = "Volume maximal atteint",
 	['volume_min'] = "Volume minimal atteint",
 
 	['preset_not_found'] = "Aucun préréglage enregistré n'a été trouvé",
 	['preset_choose'] = "Choisissez un préréglage (1 ou 2) pour enregistrer la fréquence actuelle sur.",
 	['preset_invalid'] = "Fréquence invalide",
-	['preset_set'] = "Vous avez défini le préréglage sur	%s MHz",
+	['preset_set'] = "Vous avez défini le préréglage sur %s MHz",
 	['preset_clear'] = "Préréglages radio effacés",
 }
