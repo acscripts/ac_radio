@@ -3,7 +3,7 @@
 ---------------------------------------------------------------------------------------------
 
 ac = {
-	-- Language for notifications and UI
+	-- Language for notifications and UI (cs/en/et/fr)
 	locale = 'en',
 
 	-- Whether to check for newer resource version and notify in server console.
