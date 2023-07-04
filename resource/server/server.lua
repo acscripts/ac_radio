@@ -48,21 +48,27 @@ end
 for frequency, allowed in pairs(ac.restrictedChannels) do
 	server.voice:addChannelCheck(tonumber(frequency), function(source)
 		local groups = server.players[source]
-		if not groups then return false end
+		if not groups then
+			TriggerClientEvent('ac_radio:notify', source, 'error', locale('channel_unavailable'))
+			return false
+		end
 
 		if type(allowed) == 'table' then
 			for name, rank in pairs(allowed) do
 				local groupRank = groups[name]
 				if groupRank and groupRank >= (rank or 0) then
+					TriggerClientEvent('ac_radio:notify', source, 'success', locale('channel_join', frequency))
 					return true
 				end
 			end
 		else
 			if groups[allowed] then
+				TriggerClientEvent('ac_radio:notify', source, 'success', locale('channel_join', frequency))
 				return true
 			end
 		end
 
+		TriggerClientEvent('ac_radio:notify', source, 'error', locale('channel_unavailable'))
 		return false
 	end)
 end

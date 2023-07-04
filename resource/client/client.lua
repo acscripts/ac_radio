@@ -45,7 +45,10 @@ local function joinRadio(channel)
 	if channel <= ac.maximumFrequencies and channel > 0 then
 		voice:setVoiceProperty('radioEnabled', true)
 		voice:setRadioChannel(channel)
-		notify('success', locale('channel_join', channel))
+
+		if not ac.restrictedChannels[channel] then
+			notify('success', locale('channel_join', channel))
+		end
 	else
 		notify('error', locale('channel_unavailable'))
 	end

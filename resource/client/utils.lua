@@ -49,6 +49,8 @@ function notify(type, text, duration, icon)
 	end
 end
 
+RegisterNetEvent('ac_radio:notify', notify)
+
 local focused = false
 ---@param state boolean
 function setNuiFocus(state)
