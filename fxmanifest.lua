@@ -25,15 +25,11 @@ client_scripts {
   'resource/client/client.lua'
 }
 
-ui_page 'html/index.html'
+ui_page 'web/index.html'
 
 files {
-  'locales/*.lua',
-  'html/index.html',
-  'html/style.css',
-  'html/script.js',
-  'html/assets/technology.ttf',
-  'html/assets/radio.png'
+  'web/**',
+  'locales/*.lua'
 }
 
 

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@600&display=swap');
 @font-face {
 	font-family: 'Technology';
-	src: url('assets/Technology.ttf');
+	src: url('assets/technology.ttf');
 }
 
 
@@ -29,9 +29,6 @@
 /* Action buttons */
 /* Top row */
 #join {
-	/* background: blue;
-	opacity: .1; */
-
 	cursor: pointer;
 	position: absolute;
 	padding: 13%;
@@ -40,9 +37,6 @@
 }
 
 #preset_set {
-	/* background: cyan;
-	opacity: .1; */
-
 	cursor: pointer;
 	position: absolute;
 	padding: 7% 12%;
@@ -52,9 +46,6 @@
 
 /* First column */
 #leave {
-	/* background: pink;
-	opacity: .1; */
-
 	cursor: pointer;
 	position: absolute;
 	padding: 9%;
@@ -63,9 +54,6 @@
 }
 
 #volume_mute {
-	/* background: purple;
-	opacity: .1; */
-
 	cursor: pointer;
 	position: absolute;
 	padding: 9%;
@@ -75,9 +63,6 @@
 
 /* Middle column */
 #volume_up {
-	/* background: lime;
-	opacity: .1; */
-
 	cursor: pointer;
 	position: absolute;
 	padding: 9%;
@@ -86,9 +71,6 @@
 }
 
 #volume_down {
-	/* background: green;
-	opacity: .1; */
-
 	cursor: pointer;
 	position: absolute;
 	padding: 9%;
@@ -98,9 +80,6 @@
 
 /* Last buttons */
 #preset_one {
-	/* background: orange;
-	opacity: .1; */
-
 	cursor: pointer;
 	position: absolute;
 	padding: 9%;
@@ -109,9 +88,6 @@
 }
 
 #preset_two {
-	/* background: red;
-	opacity: .1; */
-
 	cursor: pointer;
 	position: absolute;
 	padding: 9%;
