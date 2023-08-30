@@ -40,9 +40,9 @@ window.addEventListener('keyup', function(e) {
 
 // Radio control functions
 const toggleRadio = (join) => {
-	var channel = $('#radio-channel').val();
-	if (join && channel.length) {
-		sendNuiEvent('join', {channel});
+	var frequency = $('#radio-channel').val();
+	if (join && frequency.length) {
+		sendNuiEvent('join', {frequency});
 	} else if (!join) {
 		sendNuiEvent('leave');
 		$('#radio-channel').val('');
@@ -53,21 +53,21 @@ const changeVolume = (type) => {
 	sendNuiEvent(`volume_${type}`);
 }
 
-const presetChannel = (preset) => {
+const presetChannel = (presetId) => {
 	if (settingPreset) {
-		sendNuiEvent('preset_set', {preset});
+		sendNuiEvent('preset_set', {presetId});
 		settingPreset = false;
 	} else {
-		sendNuiEvent('preset_join', {preset}, function(frequency) {
+		sendNuiEvent('preset_join', {presetId}, function(frequency) {
 			$('#radio-channel').val(frequency);
 		});
 	}
 }
 
 const setPreset = () => {
-	var channel = $('#radio-channel').val();
-	if (channel.length) {
-		sendNuiEvent('preset_request', {channel});
+	var frequency = $('#radio-channel').val();
+	if (frequency.length) {
+		sendNuiEvent('preset_request', {frequency});
 		settingPreset = true;
 	}
 }
