@@ -26,7 +26,7 @@ jobs:
         run: |
           mkdir -p ./temp/ac_radio
           cp ./{LICENSE,README.md,fxmanifest.lua,config.lua} ./temp/ac_radio
-          cp -r ./{html,locales,resource} ./temp/ac_radio
+          cp -r ./{web,locales,resource} ./temp/ac_radio
           cd ./temp && zip -r ../ac_radio.zip ./ac_radio
 
       - name: Create release
