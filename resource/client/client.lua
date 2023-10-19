@@ -99,34 +99,34 @@ RegisterNUICallback('leave', function()
 end)
 
 RegisterNUICallback('volume_up', function()
-	local volume = volumeState and volumeState * 0.01 or voice:getRadioVolume()
+	local volume = volumeState or voice:getRadioVolume()
 
 	if volumeState then
 		volumeState = nil
 		notify('inform', locale('volume_unmute'), 1000)
 	end
 
-	if volume <= 0.9 then
-		local newVolume = math.floor((volume + 0.1) * 100)
-		voice:setRadioVolume(newVolume)
-		notify('inform', locale('volume_up', newVolume), 1500, 'volume-high')
+	if volume <= 90 then
+		volume += 10
+		voice:setRadioVolume(volume)
+		notify('inform', locale('volume_up', math.floor(volume)), 1500, 'volume-high')
 	else
 		notify('error', locale('volume_max'), 2500)
 	end
 end)
 
 RegisterNUICallback('volume_down', function()
-	local volume = volumeState and volumeState * 0.01 or voice:getRadioVolume()
+	local volume = volumeState or voice:getRadioVolume()
 
 	if volumeState then
 		volumeState = nil
 		notify('inform', locale('volume_unmute'), 1000)
 	end
 
-	if volume >= 0.2 then
-		local newVolume = math.floor((volume - 0.1) * 100)
-		voice:setRadioVolume(newVolume)
-		notify('inform', locale('volume_down', newVolume), 1500, 'volume-low')
+	if volume >= 20 then
+		volume -= 10
+		voice:setRadioVolume(volume)
+		notify('inform', locale('volume_down', math.floor(volume)), 1500, 'volume-low')
 	else
 		notify('error', locale('volume_min'), 2500)
 	end
@@ -138,7 +138,7 @@ RegisterNUICallback('volume_mute', function()
 		volumeState = nil
 		notify('success', locale('volume_unmute'), 5000, 'volume-high')
 	else
-		volumeState = math.floor(voice:getRadioVolume() * 100)
+		volumeState = voice:getRadioVolume()
 		voice:setRadioVolume(0)
 		notify('error', locale('volume_mute'), 5000, 'volume-xmark')
 	end
