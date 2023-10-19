@@ -9,9 +9,6 @@ ac = {
 	-- Whether to check for newer resource version and notify in server console.
 	versionCheck = true,
 
-	-- Whether to use custom notification function.
-	useCustomNotify = false,
-
 	-- Whether to use command for opening the radio UI.
 	useCommand = true,
 
