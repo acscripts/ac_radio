@@ -211,8 +211,7 @@ AddEventHandler('onResourceStop', function(resource)
 		removeRadioProp()
 		leaveRadio()
 		if uiOpened then
-			utils.setNuiFocus(false, false)
-			utils.setNuiFocusKeepInput(false)
+			utils.setNuiFocus(false)
 		end
 	end
 end)

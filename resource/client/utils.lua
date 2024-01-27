@@ -49,7 +49,7 @@ RegisterNUICallback('loaded', function()
 	local locales = lib.getLocales()
 
 	for k, v in pairs(locales) do
-		if k:find('^ui_')then
+		if k:find('^ui_') then
 			uiLocales[k] = v
 		end
 	end
