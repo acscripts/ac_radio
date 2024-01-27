@@ -40,8 +40,9 @@ local function removeRadioProp()
 end
 
 ---@param channel number?
+---@return boolean
 local function joinRadio(channel)
-	if not channel then return end
+	if not channel then return false end
 	channel = utils.round(channel, utils.decimalStep)
 
 	if channel <= config.maximumFrequencies and channel > 0 then
@@ -51,8 +52,11 @@ local function joinRadio(channel)
 		if not config.restrictedChannels[channel] then
 			utils.notify('success', locale('channel_join', channel))
 		end
+
+		return true
 	else
 		utils.notify('error', locale('channel_unavailable'))
+		return false
 	end
 end
 
@@ -154,8 +158,9 @@ RegisterNUICallback('preset_join', function(data, cb)
 	if not frequency then
 		utils.notify('error', locale('preset_not_found'))
 	else
-		joinRadio(frequency)
-		cb(frequency)
+		if joinRadio(frequency) then
+			cb(frequency)
+		end
 	end
 end)
 
