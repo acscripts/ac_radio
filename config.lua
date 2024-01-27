@@ -2,7 +2,7 @@
 -- More detailed description of each config option can be found here: https://docs.dejv.it/ac_radio
 ---------------------------------------------------------------------------------------------
 
-ac = {
+return {
 	-- Language for notifications and UI
 	locale = 'en',
 

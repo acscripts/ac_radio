@@ -1,3 +1,4 @@
+local config = require 'config'
 local Voice = exports['pma-voice']
 
 lib.locale()
@@ -6,7 +7,7 @@ AddEventHandler('ox:playerLoaded', function(source)
 	Voice:setPlayerRadio(source, 0)
 end)
 
-for frequency, groups in pairs(ac.restrictedChannels) do
+for frequency, groups in pairs(config.restrictedChannels) do
 	Voice:addChannelCheck(frequency, function(source)
 		local player = Ox.GetPlayer(source)
 		if not player then return false end
@@ -27,10 +28,10 @@ for frequency, groups in pairs(ac.restrictedChannels) do
 	end)
 end
 
-if ac.versionCheck then lib.versionCheck('acscripts/ac_radio') end
+if config.versionCheck then lib.versionCheck('acscripts/ac_radio') end
 
-SetConvarReplicated('radio_noRadioDisconnect', tostring(ac.noRadioDisconnect))
-SetConvarReplicated('voice_useNativeAudio', tostring(ac.radioEffect))
-SetConvarReplicated('voice_enableSubmix', ac.radioEffect and '1' or '0')
-SetConvarReplicated('voice_enableRadioAnim', ac.radioAnimation and '1' or '0')
-SetConvarReplicated('voice_defaultRadio', ac.radioKey)
+SetConvarReplicated('radio_noRadioDisconnect', tostring(config.noRadioDisconnect))
+SetConvarReplicated('voice_useNativeAudio', tostring(config.radioEffect))
+SetConvarReplicated('voice_enableSubmix', config.radioEffect and '1' or '0')
+SetConvarReplicated('voice_enableRadioAnim', config.radioAnimation and '1' or '0')
+SetConvarReplicated('voice_defaultRadio', config.radioKey)

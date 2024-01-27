@@ -11,7 +11,6 @@ repository 'https://github.com/antond15/ac_radio'
 
 shared_scripts {
   '@ox_lib/init.lua',
-  'config.lua',
 }
 
 server_scripts {
@@ -20,15 +19,16 @@ server_scripts {
 }
 
 client_scripts {
-  'resource/client/utils.lua',
-  'resource/client/client.lua'
+  'resource/client/client.lua',
 }
 
 ui_page 'web/index.html'
 
 files {
   'web/**',
-  'locales/*.json'
+  'locales/*.json',
+  'config.lua',
+  'resource/client/utils.lua',
 }
 
 

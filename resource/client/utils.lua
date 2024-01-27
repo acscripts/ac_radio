@@ -1,8 +1,11 @@
+local config = require 'config'
+local utils = {}
+
 ---@param type string inform / success / error
 ---@param text string Notification text
 ---@param duration? number (optional) Duration in miliseconds
 ---@param icon? string (optional) FontAwesome 6 icon name (ie. 'circle-info')
-function notify(type, text, duration, icon)
+function utils.notify(type, text, duration, icon)
 	lib.notify({
 		type = type,
 		description = text,
@@ -13,7 +16,7 @@ end
 
 local focused = false
 ---@param state boolean
-function setNuiFocus(state)
+function utils.setNuiFocus(state)
 	SetNuiFocus(state, state)
 	SetNuiFocusKeepInput(state)
 	focused = state
@@ -21,7 +24,7 @@ function setNuiFocus(state)
 	if focused then
 		CreateThread(function()
 			while focused do
-				Wait(5)
+				Wait(0)
 				DisableAllControlActions(0)
 				EnableControlAction(0, 21, true) -- INPUT_SPRINT
 				EnableControlAction(0, 22, true) -- INPUT_JUMP
@@ -36,7 +39,7 @@ function setNuiFocus(state)
 end
 
 ---@return string dict
-function getRadioDict()
+function utils.getRadioDict()
 	return cache.vehicle and 'cellphone@in_car@ds' or 'cellphone@'
 end
 
@@ -54,8 +57,8 @@ RegisterNUICallback('loaded', function()
 	SendNUIMessage({
 		action = 'setup',
 		config = {
-			max = ac.maximumFrequencies,
-			step = ac.frequencyStep,
+			max = config.maximumFrequencies,
+			step = config.frequencyStep,
 			locales = uiLocales
 		}
 	})
@@ -64,13 +67,15 @@ end)
 -- Yoinked from http://lua-users.org/wiki/SimpleRound
 ---@param num number
 ---@param decimal number
-function round(num, decimal)
+function utils.round(num, decimal)
 	local mult = 10^(decimal or 0)
 	return math.floor(num * mult + 0.5) / mult
 end
 
 do
-	local step = tostring(ac.frequencyStep)
+	local step = tostring(config.frequencyStep)
 	local pos = step:find('%.')
-	ac.decimalStep = pos and #step:sub(pos + 1) or 0
+	utils.decimalStep = pos and #step:sub(pos + 1) or 0
 end
+
+return utils

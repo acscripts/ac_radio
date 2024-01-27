@@ -1,9 +1,11 @@
+local config = require 'config'
+local utils = require 'resource.client.utils'
+local Voice = exports['pma-voice']
+
 local radioProp = nil ---@type number | nil
 local volumeState = nil ---@type number | nil
 local requestedFrequency = nil ---@type number | nil
 local uiOpened = false
-
-local Voice = exports['pma-voice']
 
 lib.locale()
 
@@ -11,7 +13,7 @@ local function openRadio()
 	if uiOpened then return end
 	uiOpened = true
 
-	setNuiFocus(true)
+	utils.setNuiFocus(true)
 	SetCursorLocation(0.917, 0.873)
 	SendNUIMessage({ action = 'open' })
 
@@ -24,7 +26,7 @@ local function openRadio()
 	AttachEntityToEntity(radioProp, cache.ped, GetPedBoneIndex(cache.ped, 28422), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, true, true, false, true, 0, true)
 	SetModelAsNoLongerNeeded(model)
 
-	local dict = getRadioDict()
+	local dict = utils.getRadioDict()
 	lib.requestAnimDict(dict)
 	TaskPlayAnim(cache.ped, dict, 'cellphone_text_in', 4.0, -1, -1, 50, 0, false, false, false)
 	RemoveAnimDict(dict)
@@ -40,17 +42,17 @@ end
 ---@param channel number?
 local function joinRadio(channel)
 	if not channel then return end
-	channel = round(channel, ac.decimalStep)
+	channel = utils.round(channel, utils.decimalStep)
 
-	if channel <= ac.maximumFrequencies and channel > 0 then
+	if channel <= config.maximumFrequencies and channel > 0 then
 		Voice:setVoiceProperty('radioEnabled', true)
 		Voice:setRadioChannel(channel)
 
-		if not ac.restrictedChannels[channel] then
-			notify('success', locale('channel_join', channel))
+		if not config.restrictedChannels[channel] then
+			utils.notify('success', locale('channel_join', channel))
 		end
 	else
-		notify('error', locale('channel_unavailable'))
+		utils.notify('error', locale('channel_unavailable'))
 	end
 end
 
@@ -68,13 +70,13 @@ end
 ---@field presetId number
 
 RegisterNUICallback('close', function()
-	setNuiFocus(false)
+	utils.setNuiFocus(false)
 
 	if requestedFrequency then
 		requestedFrequency = nil
 	end
 
-	local dict = getRadioDict()
+	local dict = utils.getRadioDict()
 	StopAnimTask(cache.ped, dict, 'cellphone_text_in', 1.0)
 	Wait(100)
 	lib.requestAnimDict(dict)
@@ -94,7 +96,7 @@ end)
 
 RegisterNUICallback('leave', function()
 	leaveRadio()
-	notify('success', locale('channel_disconnect'))
+	utils.notify('success', locale('channel_disconnect'))
 end)
 
 RegisterNUICallback('volume_up', function()
@@ -102,15 +104,15 @@ RegisterNUICallback('volume_up', function()
 
 	if volumeState then
 		volumeState = nil
-		notify('inform', locale('volume_unmute'), 1000)
+		utils.notify('inform', locale('volume_unmute'), 1000)
 	end
 
 	if volume <= 90 then
 		volume += 10
 		Voice:setRadioVolume(volume)
-		notify('inform', locale('volume_up', math.floor(volume)), 1500, 'volume-high')
+		utils.notify('inform', locale('volume_up', math.floor(volume)), 1500, 'volume-high')
 	else
-		notify('error', locale('volume_max'), 2500)
+		utils.notify('error', locale('volume_max'), 2500)
 	end
 end)
 
@@ -119,15 +121,15 @@ RegisterNUICallback('volume_down', function()
 
 	if volumeState then
 		volumeState = nil
-		notify('inform', locale('volume_unmute'), 1000)
+		utils.notify('inform', locale('volume_unmute'), 1000)
 	end
 
 	if volume >= 20 then
 		volume -= 10
 		Voice:setRadioVolume(volume)
-		notify('inform', locale('volume_down', math.floor(volume)), 1500, 'volume-low')
+		utils.notify('inform', locale('volume_down', math.floor(volume)), 1500, 'volume-low')
 	else
-		notify('error', locale('volume_min'), 2500)
+		utils.notify('error', locale('volume_min'), 2500)
 	end
 end)
 
@@ -135,11 +137,11 @@ RegisterNUICallback('volume_mute', function()
 	if volumeState then
 		Voice:setRadioVolume(volumeState)
 		volumeState = nil
-		notify('success', locale('volume_unmute'), 5000, 'volume-high')
+		utils.notify('success', locale('volume_unmute'), 5000, 'volume-high')
 	else
 		volumeState = Voice:getRadioVolume()
 		Voice:setRadioVolume(0)
-		notify('error', locale('volume_mute'), 5000, 'volume-xmark')
+		utils.notify('error', locale('volume_mute'), 5000, 'volume-xmark')
 	end
 end)
 
@@ -150,7 +152,7 @@ RegisterNUICallback('preset_join', function(data, cb)
 
 	local frequency = tonumber(GetResourceKvpString('ac_radio:preset_'.. data.presetId))
 	if not frequency then
-		notify('error', locale('preset_not_found'))
+		utils.notify('error', locale('preset_not_found'))
 	else
 		joinRadio(frequency)
 		cb(frequency)
@@ -160,7 +162,7 @@ end)
 ---@param data ChannelData
 RegisterNUICallback('preset_request', function(data)
 	if data?.frequency then
-		notify('inform', locale('preset_choose'), 10000)
+		utils.notify('inform', locale('preset_choose'), 10000)
 		requestedFrequency = data.frequency
 	end
 end)
@@ -170,31 +172,31 @@ RegisterNUICallback('preset_set', function(data)
 	if not data or not requestedFrequency then return end
 
 	if not data.presetId then
-		notify('error', locale('preset_invalid'))
+		utils.notify('error', locale('preset_invalid'))
 	else
 		SetResourceKvp('ac_radio:preset_'.. data.presetId, tostring(requestedFrequency))
-		notify('success', locale('preset_set', requestedFrequency))
+		utils.notify('success', locale('preset_set', requestedFrequency))
 		requestedFrequency = nil
 	end
 end)
 
 
 
-if ac.useCommand then
+if config.useCommand then
 	TriggerEvent('chat:addSuggestion', '/radio', locale('command_open'))
 	RegisterCommand('radio', function()
 		openRadio()
 	end, false)
 
-	if ac.commandKey then
-		RegisterKeyMapping('radio', locale('keymap_open'), 'keyboard', ac.commandKey)
+	if config.commandKey then
+		RegisterKeyMapping('radio', locale('keymap_open'), 'keyboard', config.commandKey)
 	end
 end
 
 TriggerEvent('chat:addSuggestion', '/radio:clear', locale('command_clear'))
 RegisterCommand('radio:clear', function()
 	for i = 1, 2 do DeleteResourceKvp('ac_radio:preset_'..i) end
-	notify('success', locale('preset_clear'))
+	utils.notify('success', locale('preset_clear'))
 end, false)
 
 RegisterNetEvent('ac_radio:disableRadio', function()
@@ -210,8 +212,8 @@ AddEventHandler('onResourceStop', function(resource)
 		removeRadioProp()
 		leaveRadio()
 		if uiOpened then
-			SetNuiFocus(false, false)
-			SetNuiFocusKeepInput(false)
+			utils.setNuiFocus(false, false)
+			utils.setNuiFocusKeepInput(false)
 		end
 	end
 end)
