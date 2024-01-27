@@ -61,7 +61,7 @@ function setNuiFocus(state)
 	if focused then
 		CreateThread(function()
 			while focused do
-				Wait(5)
+				Wait(0)
 				DisableAllControlActions(0)
 				EnableControlAction(0, 21, true) -- INPUT_SPRINT
 				EnableControlAction(0, 22, true) -- INPUT_JUMP
@@ -102,8 +102,8 @@ end
 -- Send setup data to NUI
 RegisterNUICallback('loaded', function()
 	local uiLocales = {}
-	for k,v in pairs(locales) do
-		if k:find('ui_') then
+	for k, v in pairs(locales) do
+		if k:find('^ui_') then
 			uiLocales[k] = v
 		end
 	end

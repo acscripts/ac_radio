@@ -7,7 +7,7 @@ const sendNuiEvent = (name, data, callback) => {
 
 
 // Event listeners
-window.addEventListener('message', function(event) {
+window.addEventListener('message', (event) => {
 	const data = event.data;
 	if (data.action == 'open') {
 		$('.wrapper').fadeIn();
@@ -25,12 +25,12 @@ window.addEventListener('message', function(event) {
 	}
 });
 
-window.addEventListener('load', function() {
+window.addEventListener('load', () => {
 	sendNuiEvent('loaded');
 });
 
-window.addEventListener('keyup', function(e) {
-	if (e.code == 'Escape' && $('.wrapper').is(':visible')) {
+window.addEventListener('keyup', (key) => {
+	if (key.code == 'Escape' && $('.wrapper').is(':visible')) {
 		$('.wrapper').fadeOut();
 		sendNuiEvent('close');
 		settingPreset = false;
@@ -40,9 +40,11 @@ window.addEventListener('keyup', function(e) {
 
 // Radio control functions
 const toggleRadio = (join) => {
-	var channel = $('#radio-channel').val();
-	if (join && channel.length) {
-		sendNuiEvent('join', {channel});
+	var frequency = $('#radio-channel').val();
+	if (join && frequency.length) {
+		sendNuiEvent('join', frequency, (frequency) => {
+			$('#radio-channel').val(frequency || '');
+		});
 	} else if (!join) {
 		sendNuiEvent('leave');
 		$('#radio-channel').val('');
@@ -53,21 +55,21 @@ const changeVolume = (type) => {
 	sendNuiEvent(`volume_${type}`);
 }
 
-const presetChannel = (preset) => {
+const presetChannel = (presetId) => {
 	if (settingPreset) {
-		sendNuiEvent('preset_set', {preset});
+		sendNuiEvent('preset_set', presetId);
 		settingPreset = false;
 	} else {
-		sendNuiEvent('preset_join', {preset}, function(frequency) {
-			$('#radio-channel').val(frequency);
+		sendNuiEvent('preset_join', presetId, (frequency) => {
+			$('#radio-channel').val(frequency || '');
 		});
 	}
 }
 
 const setPreset = () => {
-	var channel = $('#radio-channel').val();
-	if (channel.length) {
-		sendNuiEvent('preset_request', {channel});
+	var frequency = $('#radio-channel').val();
+	if (frequency.length) {
+		sendNuiEvent('preset_request', frequency);
 		settingPreset = true;
 	}
 }
