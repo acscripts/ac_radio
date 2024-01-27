@@ -67,12 +67,6 @@ end
 
 
 
----@class ChannelData
----@field frequency number
-
----@class PresetData
----@field presetId number
-
 RegisterNUICallback('close', function()
 	utils.setNuiFocus(false)
 
@@ -93,9 +87,9 @@ RegisterNUICallback('close', function()
 	uiOpened = false
 end)
 
----@param data ChannelData
-RegisterNUICallback('join', function(data)
-	joinRadio(data?.frequency)
+---@param frequency number
+RegisterNUICallback('join', function(frequency)
+	joinRadio(frequency)
 end)
 
 RegisterNUICallback('leave', function()
@@ -149,12 +143,12 @@ RegisterNUICallback('volume_mute', function()
 	end
 end)
 
----@param data PresetData
 ---@param cb fun(preset: number)
-RegisterNUICallback('preset_join', function(data, cb)
 	if not data?.presetId then return end
 
-	local frequency = tonumber(GetResourceKvpString('ac_radio:preset_'.. data.presetId))
+---@param presetId number
+RegisterNUICallback('preset_join', function(presetId, cb)
+	local frequency = tonumber(GetResourceKvpString('ac_radio:preset_'.. presetId))
 	if not frequency then
 		utils.notify('error', locale('preset_not_found'))
 	else
@@ -164,22 +158,22 @@ RegisterNUICallback('preset_join', function(data, cb)
 	end
 end)
 
----@param data ChannelData
-RegisterNUICallback('preset_request', function(data)
-	if data?.frequency then
+---@param frequency number
+RegisterNUICallback('preset_request', function(frequency)
+	if frequency then
 		utils.notify('inform', locale('preset_choose'), 10000)
-		requestedFrequency = data.frequency
+		requestedFrequency = frequency
 	end
 end)
 
----@param data PresetData
-RegisterNUICallback('preset_set', function(data)
-	if not data or not requestedFrequency then return end
+---@param presetId number
+RegisterNUICallback('preset_set', function(presetId)
+	if not requestedFrequency then return end
 
-	if not data.presetId then
+	if not presetId then
 		utils.notify('error', locale('preset_invalid'))
 	else
-		SetResourceKvp('ac_radio:preset_'.. data.presetId, tostring(requestedFrequency))
+		SetResourceKvp('ac_radio:preset_'.. presetId, tostring(requestedFrequency))
 		utils.notify('success', locale('preset_set', requestedFrequency))
 		requestedFrequency = nil
 	end

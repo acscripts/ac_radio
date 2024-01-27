@@ -7,7 +7,7 @@ const sendNuiEvent = (name, data, callback) => {
 
 
 // Event listeners
-window.addEventListener('message', function(event) {
+window.addEventListener('message', (event) => {
 	const data = event.data;
 	if (data.action == 'open') {
 		$('.wrapper').fadeIn();
@@ -25,12 +25,12 @@ window.addEventListener('message', function(event) {
 	}
 });
 
-window.addEventListener('load', function() {
+window.addEventListener('load', () => {
 	sendNuiEvent('loaded');
 });
 
-window.addEventListener('keyup', function(e) {
-	if (e.code == 'Escape' && $('.wrapper').is(':visible')) {
+window.addEventListener('keyup', (key) => {
+	if (key.code == 'Escape' && $('.wrapper').is(':visible')) {
 		$('.wrapper').fadeOut();
 		sendNuiEvent('close');
 		settingPreset = false;
@@ -42,7 +42,7 @@ window.addEventListener('keyup', function(e) {
 const toggleRadio = (join) => {
 	var frequency = $('#radio-channel').val();
 	if (join && frequency.length) {
-		sendNuiEvent('join', {frequency});
+		sendNuiEvent('join', frequency);
 	} else if (!join) {
 		sendNuiEvent('leave');
 		$('#radio-channel').val('');
@@ -55,11 +55,11 @@ const changeVolume = (type) => {
 
 const presetChannel = (presetId) => {
 	if (settingPreset) {
-		sendNuiEvent('preset_set', {presetId});
+		sendNuiEvent('preset_set', presetId);
 		settingPreset = false;
 	} else {
-		sendNuiEvent('preset_join', {presetId}, function(frequency) {
 			$('#radio-channel').val(frequency);
+		sendNuiEvent('preset_join', presetId, (frequency) => {
 		});
 	}
 }
@@ -67,7 +67,7 @@ const presetChannel = (presetId) => {
 const setPreset = () => {
 	var frequency = $('#radio-channel').val();
 	if (frequency.length) {
-		sendNuiEvent('preset_request', {frequency});
+		sendNuiEvent('preset_request', frequency);
 		settingPreset = true;
 	}
 }
