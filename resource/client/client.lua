@@ -162,7 +162,7 @@ end)
 RegisterNUICallback('preset_request', function(frequency)
 	if frequency then
 		utils.notify('inform', locale('preset_choose'), 10000)
-		requestedFrequency = frequency
+		requestedFrequency = utils.round(frequency, utils.decimalStep)
 	end
 end)
 
