@@ -42,7 +42,9 @@ window.addEventListener('keyup', (key) => {
 const toggleRadio = (join) => {
 	var frequency = $('#radio-channel').val();
 	if (join && frequency.length) {
-		sendNuiEvent('join', frequency);
+		sendNuiEvent('join', frequency, (frequency) => {
+			$('#radio-channel').val(frequency || '');
+		});
 	} else if (!join) {
 		sendNuiEvent('leave');
 		$('#radio-channel').val('');
@@ -58,8 +60,8 @@ const presetChannel = (presetId) => {
 		sendNuiEvent('preset_set', presetId);
 		settingPreset = false;
 	} else {
-			$('#radio-channel').val(frequency);
 		sendNuiEvent('preset_join', presetId, (frequency) => {
+			$('#radio-channel').val(frequency || '');
 		});
 	}
 }

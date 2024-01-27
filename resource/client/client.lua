@@ -40,9 +40,10 @@ local function removeRadioProp()
 end
 
 ---@param channel number?
----@return boolean
+---@return false | number
 local function joinRadio(channel)
 	if not channel then return false end
+
 	channel = utils.round(channel, utils.decimalStep)
 
 	if channel <= config.maximumFrequencies and channel > 0 then
@@ -53,7 +54,7 @@ local function joinRadio(channel)
 			utils.notify('success', locale('channel_join', channel))
 		end
 
-		return true
+		return channel
 	else
 		utils.notify('error', locale('channel_unavailable'))
 		return false
@@ -88,8 +89,10 @@ RegisterNUICallback('close', function()
 end)
 
 ---@param frequency number
-RegisterNUICallback('join', function(frequency)
-	joinRadio(frequency)
+---@param cb fun(frequency: false | number)
+RegisterNUICallback('join', function(frequency, cb)
+	local roundedFrequency = joinRadio(frequency)
+	cb(roundedFrequency)
 end)
 
 RegisterNUICallback('leave', function()
@@ -143,18 +146,15 @@ RegisterNUICallback('volume_mute', function()
 	end
 end)
 
----@param cb fun(preset: number)
-	if not data?.presetId then return end
-
 ---@param presetId number
+---@param cb fun(preset: false | number)
 RegisterNUICallback('preset_join', function(presetId, cb)
 	local frequency = tonumber(GetResourceKvpString('ac_radio:preset_'.. presetId))
 	if not frequency then
 		utils.notify('error', locale('preset_not_found'))
 	else
-		if joinRadio(frequency) then
-			cb(frequency)
-		end
+		local roundedFrequency = joinRadio(frequency)
+		cb(roundedFrequency)
 	end
 end)
 
