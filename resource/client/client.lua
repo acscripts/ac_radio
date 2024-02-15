@@ -67,7 +67,8 @@ end
 
 
 
-RegisterNUICallback('close', function()
+RegisterNUICallback('close', function(_, cb)
+	cb(1)
 	setNuiFocus(false)
 
 	if requestedFrequency then
@@ -95,12 +96,15 @@ RegisterNUICallback('join', function(frequency, cb)
 	cb(roundedFrequency)
 end)
 
-RegisterNUICallback('leave', function()
+RegisterNUICallback('leave', function(_, cb)
+	cb(1)
 	leaveRadio()
 	notify('success', locale('channel_disconnect'))
 end)
 
-RegisterNUICallback('volume_up', function()
+RegisterNUICallback('volume_up', function(_, cb)
+	cb(1)
+
 	local volume = volumeState or Voice:getRadioVolume()
 
 	if volumeState then
@@ -117,7 +121,9 @@ RegisterNUICallback('volume_up', function()
 	end
 end)
 
-RegisterNUICallback('volume_down', function()
+RegisterNUICallback('volume_down', function(_, cb)
+	cb(1)
+
 	local volume = volumeState or Voice:getRadioVolume()
 
 	if volumeState then
@@ -134,7 +140,9 @@ RegisterNUICallback('volume_down', function()
 	end
 end)
 
-RegisterNUICallback('volume_mute', function()
+RegisterNUICallback('volume_mute', function(_, cb)
+	cb(1)
+
 	if volumeState then
 		Voice:setRadioVolume(volumeState)
 		volumeState = nil
@@ -151,6 +159,7 @@ end)
 RegisterNUICallback('preset_join', function(presetId, cb)
 	local frequency = tonumber(GetResourceKvpString('ac_radio:preset_'.. presetId))
 	if not frequency then
+		cb(false)
 		notify('error', locale('preset_not_found'))
 	else
 		local roundedFrequency = joinRadio(frequency)
@@ -159,7 +168,9 @@ RegisterNUICallback('preset_join', function(presetId, cb)
 end)
 
 ---@param frequency number
-RegisterNUICallback('preset_request', function(frequency)
+RegisterNUICallback('preset_request', function(frequency, cb)
+	cb(1)
+
 	if frequency then
 		notify('inform', locale('preset_choose'), 10000)
 		requestedFrequency = utils.round(frequency, utils.decimalStep)
@@ -167,7 +178,9 @@ RegisterNUICallback('preset_request', function(frequency)
 end)
 
 ---@param presetId number
-RegisterNUICallback('preset_set', function(presetId)
+RegisterNUICallback('preset_set', function(presetId, cb)
+	cb(1)
+
 	if not requestedFrequency then return end
 
 	if not presetId then

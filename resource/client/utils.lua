@@ -100,7 +100,7 @@ function requestAnimDict(dict)
 end
 
 -- Send setup data to NUI
-RegisterNUICallback('loaded', function()
+RegisterNUICallback('loaded', function(_, cb)
 	local uiLocales = {}
 	for k, v in pairs(locales) do
 		if k:find('^ui_') then
@@ -108,13 +108,10 @@ RegisterNUICallback('loaded', function()
 		end
 	end
 
-	SendNUIMessage({
-		action = 'setup',
-		config = {
-			max = ac.maximumFrequencies,
-			step = ac.frequencyStep,
-			locales = uiLocales
-		}
+	cb({
+		max = ac.maximumFrequencies,
+		step = ac.frequencyStep,
+		locales = uiLocales,
 	})
 end)
 
