@@ -44,7 +44,7 @@ function utils.getRadioDict()
 end
 
 -- Send setup data to NUI
-RegisterNUICallback('loaded', function()
+RegisterNUICallback('loaded', function(_, cb)
 	local uiLocales = {}
 	local locales = lib.getLocales()
 
@@ -54,13 +54,10 @@ RegisterNUICallback('loaded', function()
 		end
 	end
 
-	SendNUIMessage({
-		action = 'setup',
-		config = {
-			max = config.maximumFrequencies,
-			step = config.frequencyStep,
-			locales = uiLocales
-		}
+	cb({
+		max = config.maximumFrequencies,
+		step = config.frequencyStep,
+		locales = uiLocales
 	})
 end)
 

@@ -11,22 +11,22 @@ window.addEventListener('message', (event) => {
 	const data = event.data;
 	if (data.action == 'open') {
 		$('.wrapper').fadeIn();
-	} else if (data.action == 'setup') {
-		$('#radio-channel').attr({
-			max: data.config.max,
-			placeholder: data.config.max,
-			min: data.config.step,
-			step: data.config.step
-		});
-
-		for (const [key, value] of Object.entries(data.config.locales)) {
-			$(`#${key.slice(3)}`).attr('tooltip', value);
-		}
 	}
 });
 
 window.addEventListener('load', () => {
-	sendNuiEvent('loaded');
+	sendNuiEvent('loaded', null, (config) => {
+		$('#radio-channel').attr({
+			max: config.max,
+			placeholder: config.max,
+			min: config.step,
+			step: config.step
+		});
+
+		for (const [key, value] of Object.entries(config.locales)) {
+			$(`#${key.slice(3)}`).attr('tooltip', value);
+		}
+	});
 });
 
 window.addEventListener('keyup', (key) => {
