@@ -20,7 +20,7 @@ Report bugs using [GitHub issues](https://github.com/antond15/ac_radio/issues). 
 - Support for custom locales
 
 ### Documentation
-https://docs.dejv.it/ac_radio
+https://docs.acscripts.dev/radio
 
 ### Preview
 https://youtu.be/9zxbDJMhVSw
