@@ -97,13 +97,16 @@ local function leaveFrequency()
     Voice:setVoiceProperty('radioEnabled', false)
 end
 
+local function closeUi()
+    isOpened = false
+    requestedFrequency = nil
+end
+
 
 
 RegisterNUICallback('closeUi', function(_, cb)
     cb(1)
-
-    isOpened = false
-    requestedFrequency = nil
+    closeUi()
 end)
 
 ---@param frequency number
@@ -286,6 +289,8 @@ end, false)
 
 -- events and exports
 RegisterNetEvent('ac_radio:disableRadio', function()
+    closeUi()
+    SendNUIMessage({ action = 'closeUi' })
     Voice:setVoiceProperty('radioEnabled', false)
 end)
 

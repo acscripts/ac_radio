@@ -30,4 +30,7 @@ ox_libs {
   'math',
 }
 
-dependency 'pma-voice'
+dependencies {
+  'ox_lib',
+  'pma-voice',
+}

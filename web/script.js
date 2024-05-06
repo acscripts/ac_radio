@@ -10,6 +10,11 @@ const setLocale = (locales) => {
 	}
 }
 
+const closeUi = () => {
+	$('.wrapper').fadeOut();
+	settingPreset = false;
+}
+
 
 
 // event listeners
@@ -20,6 +25,8 @@ window.addEventListener('message', (event) => {
 		$('.wrapper').fadeIn();
 	} else if (action == 'setLocale') {
 		setLocale(data);
+	} else if (action == 'closeUi') {
+		closeUi();
 	}
 });
 
@@ -38,9 +45,8 @@ window.addEventListener('load', () => {
 
 window.addEventListener('keyup', (key) => {
 	if (key.code == 'Escape' && $('.wrapper').is(':visible')) {
-		$('.wrapper').fadeOut();
 		sendNuiEvent('closeUi');
-		settingPreset = false;
+		closeUi();
 	};
 });
 

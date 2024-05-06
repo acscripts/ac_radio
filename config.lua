@@ -13,6 +13,9 @@ return {
         },
     },
 
+    disconnectWithoutRadio = true,
+
+    useUsableItem = true,
     useCommand = true,
     commandKey = '',
 
