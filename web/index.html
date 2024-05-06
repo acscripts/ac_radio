@@ -19,10 +19,10 @@
 				<div class='button' id='preset_set' onclick='setPreset()' tooltip='Set preset'></div>
 
 				<div class='button' id='leave' onclick='toggleRadio()' tooltip='Turn off'></div>
-				<div class='button' id='volume_mute' onclick='changeVolume("mute")' tooltip='Mute'></div>
+				<div class='button' id='volume_mute' onclick='sendNuiEvent("volumeMute")' tooltip='Mute'></div>
 
-				<div class='button' id='volume_up' onclick='changeVolume("up")' tooltip='Volume up'></div>
-				<div class='button' id='volume_down' onclick='changeVolume("down")' tooltip='Volume down'></div>
+				<div class='button' id='volume_up' onclick='sendNuiEvent("volumeUp")' tooltip='Volume up'></div>
+				<div class='button' id='volume_down' onclick='sendNuiEvent("volumeDown")' tooltip='Volume down'></div>
 
 				<div class='button' id='preset_one' onclick='presetChannel(1)' tooltip='Preset #1'></div>
 				<div class='button' id='preset_two' onclick='presetChannel(2)' tooltip='Preset #2'></div>

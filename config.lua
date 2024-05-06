@@ -1,45 +1,44 @@
----------------------------------------------------------------------------------------------
--- More detailed description of each config option can be found here: https://docs.dejv.it/ac_radio
----------------------------------------------------------------------------------------------
+-----------------------------------------------------------------
+-- Visit https://docs.acscripts.dev/radio for documentation
+-----------------------------------------------------------------
 
-ac = {
-	-- Language for notifications and UI
-	locale = 'en',
+return {
+    -- Enable usable item for opening the radio
+    useUsableItem = true,
 
-	-- Whether to check for newer resource version and notify in server console.
-	versionCheck = true,
+    -- Enable command for opening the radio
+    useCommand = true,
 
-	-- Whether to use custom notification function.
-	useCustomNotify = false,
+    -- Default keybind for the '/radio' command
+    commandKey = '',
 
-	-- Whether to use command for opening the radio UI.
-	useCommand = true,
+    -- Enable disconnecting from frequency when there is no radio item left in player's inventory
+    disconnectWithoutRadio = true,
 
-	-- Default keybind for the '/radio' command.
-	commandKey = '',
+    -- Percentage of volume to increase/decrease per step
+    volumeStep = 10,
 
-	-- Whether to disconnect from radio when there is no radio item in player's inventory.
-	noRadioDisconnect = true,
+    -- Frequency decimal precision
+    frequencyStep = 0.01,
 
-	-- Number of available frequencies.
-	maximumFrequencies = 1000,
+    -- Maximum amount of available frequencies (starting from 0)
+    maximumFrequencies = 1000,
 
-	-- How much the frequency value can change per step.
-	frequencyStep = 0.01,
+    -- Frequency restrictions for channels
+    restrictedChannels = {
+        [10] = 'police',
+        [11] = {
+            police = 2,
+        },
+    },
 
-	-- Channel frequency restrictions.
-	restrictedChannels = {
-		[1] = 'police'
-	},
+    -- ! The following options will override pma-voice convars
+    -- Enable radio voice effect (voice sounds like on a real radio)
+    radioEffect = true,
 
-	-- ! The following options will override the pma-voice convars.
-	-- Whether to enable radio submix (voice sounds like on real radio).
-	radioEffect = true,
+    -- Enable animation while talking on radio
+    radioAnimation = true,
 
-	-- Whether to enable animation while talking on radio.
-	radioAnimation = true,
-
-	-- Default keybind for talking on radio.
-	radioKey = 'LMENU',
-
+    -- Default keybind for talking on radio
+    radioTalkKey = 'LMENU',
 }

@@ -12,10 +12,10 @@ jobs:
 
     steps:
       - name: Get latest code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Update tag
-        uses: EndBug/latest-tag@v1.5.0
+        uses: EndBug/latest-tag@v1
         with:
           ref: ${{ github.ref_name }}
 
@@ -26,12 +26,12 @@ jobs:
         run: |
           mkdir -p ./temp/ac_radio
           cp ./{LICENSE,README.md,fxmanifest.lua,config.lua} ./temp/ac_radio
-          cp -r ./{web,locales,resource} ./temp/ac_radio
+          cp -r ./{locales,modules,resource,web} ./temp/ac_radio
           cd ./temp && zip -r ../ac_radio.zip ./ac_radio
 
       - name: Create release
-        uses: marvinpinto/action-automatic-releases@v1.2.1
+        uses: softprops/action-gh-release@v2
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           prerelease: false
           files: ac_radio.zip
