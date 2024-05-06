@@ -32,6 +32,6 @@ jobs:
       - name: Create release
         uses: softprops/action-gh-release@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ github.token }}
           prerelease: false
           files: ac_radio.zip
