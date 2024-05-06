@@ -1,6 +1,7 @@
+local Config = require 'config'
+local Utils = require 'modules.server.utils'
 local QB = exports['qb-core']:GetCoreObject()
 local Voice = exports['pma-voice']
-local Config = require 'config'
 
 AddEventHandler('QBCore:Server:PlayerLoaded', function(player)
     Voice:setPlayerRadio(player.PlayerData.source, 0)
@@ -12,6 +13,12 @@ AddEventHandler('QBCore:Server:OnPlayerUnload', function(playerId)
 end)
 
 CreateThread(function()
+    if Config.useUsableItem and not Utils.hasExport('ox_inventory.Items') then
+        QB.Functions.CreateUseableItem('radio', function(playerId)
+            TriggerClientEvent('ac_radio:openRadio', playerId)
+        end)
+    end
+
     for frequency, allowed in pairs(Config.restrictedChannels) do
         Voice:addChannelCheck(tonumber(frequency), function(playerId)
             local player = QB.Functions.GetPlayer(playerId)
@@ -21,10 +28,10 @@ CreateThread(function()
 
             if type(allowed) == 'table' then
                 for name, grade in pairs(allowed) do
-                    if job.name == name and job.grade >= (grade or 0) then
+                    if job.name == name and job.grade.level >= (grade or 0) then
                         lib.notify(playerId, {
                             type = 'success',
-                            description = locale('channel_join', frequency),
+                            description = locale('channel_join', frequency + 0.0),
                         })
                         return true
                     end
@@ -33,7 +40,7 @@ CreateThread(function()
                 if job.name == allowed then
                     lib.notify(playerId, {
                         type = 'success',
-                        description = locale('channel_join', frequency),
+                        description = locale('channel_join', frequency + 0.0),
                     })
                     return true
                 end
