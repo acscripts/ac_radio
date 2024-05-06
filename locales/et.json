@@ -1,0 +1,32 @@
+{
+  "ui": {
+    "join": "Ühine sagedusega",
+    "leave": "Lülita välja",
+    "preset_set": "Määra eelseade",
+    "preset_one": "Eelseadistus #1",
+    "preset_two": "Eelseadistus #2",
+    "volume_mute": "Vaigista",
+    "volume_up": "Valjemaks",
+    "volume_down": "Vaiksemaks"
+  },
+
+  "command_open": "Avab raadio",
+  "command_clear": "Kustutab kõik raadio eelseadistused",
+  "keymap_open": "Ava raadio",
+
+  "channel_join": "Ühinesid sagedusega %s MHz",
+  "channel_unavailable": "See sagedus pole kättesaadav",
+  "channel_disconnect": "Katkestasid ühenduse raadioga",
+
+  "volume_mute": "Vaigistus peal",
+  "volume_unmute": "Vaigistus maas",
+  "volume_up": "Uus helitugevus: %s%%",
+  "volume_down": "Uus helitugevus: %s%%",
+  "volume_max": "Rohkem valjemaks ei saa enam panna",
+  "volume_min": "Vähem valjemaks ei saa enam panna",
+
+  "preset_not_found": "Ühtegi eelseadistust ei leitud",
+  "preset_choose": "Vali eelseadistus (1 või 2) et salvestada praegune sagedus.",
+  "preset_set": "Määrasid eelseadistuse sageduseks %s MHz",
+  "preset_clear": "Raadio eelseadistused kustutatud"
+}

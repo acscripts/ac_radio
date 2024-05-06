@@ -1,45 +1,22 @@
----------------------------------------------------------------------------------------------
--- More detailed description of each config option can be found here: https://docs.dejv.it/ac_radio
----------------------------------------------------------------------------------------------
+return {
 
-ac = {
-	-- Language for notifications and UI
-	locale = 'en',
+    volumeStep = 10,
 
-	-- Whether to check for newer resource version and notify in server console.
-	versionCheck = true,
+    frequencyStep = 0.01,
 
-	-- Whether to use custom notification function.
-	useCustomNotify = false,
+    maximumFrequencies = 1000,
 
-	-- Whether to use command for opening the radio UI.
-	useCommand = true,
+    restrictedChannels = {
+        [10] = 'police',
+        [11] = {
+            police = 2,
+        },
+    },
 
-	-- Default keybind for the '/radio' command.
-	commandKey = '',
+    useCommand = true,
+    commandKey = '',
 
-	-- Whether to disconnect from radio when there is no radio item in player's inventory.
-	noRadioDisconnect = true,
-
-	-- Number of available frequencies.
-	maximumFrequencies = 1000,
-
-	-- How much the frequency value can change per step.
-	frequencyStep = 0.01,
-
-	-- Channel frequency restrictions.
-	restrictedChannels = {
-		[1] = 'police'
-	},
-
-	-- ! The following options will override the pma-voice convars.
-	-- Whether to enable radio submix (voice sounds like on real radio).
-	radioEffect = true,
-
-	-- Whether to enable animation while talking on radio.
-	radioAnimation = true,
-
-	-- Default keybind for talking on radio.
-	radioKey = 'LMENU',
-
+    radioEffect = true,
+    radioAnimation = true,
+    radioTalkKey = 'LMENU',
 }

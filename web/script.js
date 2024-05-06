@@ -1,21 +1,30 @@
-var settingPreset = false;
+let settingPreset = false;
 
-// Just a wrapper for the JQ post method
 const sendNuiEvent = (name, data, callback) => {
 	$.post(`https://ac_radio/${name}`, JSON.stringify(data), callback);
 }
 
+const setLocale = (locales) => {
+	for (const [key, value] of Object.entries(locales)) {
+		$(`#${key.slice(3)}`).attr('tooltip', value);
+	}
+}
 
-// Event listeners
+
+
+// event listeners
 window.addEventListener('message', (event) => {
-	const data = event.data;
-	if (data.action == 'open') {
+	const { action, data } = event.data;
+
+	if (action == 'openUi') {
 		$('.wrapper').fadeIn();
+	} else if (action == 'setLocale') {
+		setLocale(data);
 	}
 });
 
 window.addEventListener('load', () => {
-	sendNuiEvent('loaded', null, (config) => {
+	sendNuiEvent('getConfig', null, (config) => {
 		$('#radio-channel').attr({
 			max: config.max,
 			placeholder: config.max,
@@ -23,53 +32,48 @@ window.addEventListener('load', () => {
 			step: config.step
 		});
 
-		for (const [key, value] of Object.entries(config.locales)) {
-			$(`#${key.slice(3)}`).attr('tooltip', value);
-		}
+		setLocale(config.locales);
 	});
 });
 
 window.addEventListener('keyup', (key) => {
 	if (key.code == 'Escape' && $('.wrapper').is(':visible')) {
 		$('.wrapper').fadeOut();
-		sendNuiEvent('close');
+		sendNuiEvent('closeUi');
 		settingPreset = false;
 	};
 });
 
 
-// Radio control functions
+
+// radio control functions
 const toggleRadio = (join) => {
-	var frequency = $('#radio-channel').val();
+	let frequency = $('#radio-channel').val();
 	if (join && frequency.length) {
-		sendNuiEvent('join', frequency, (frequency) => {
+		sendNuiEvent('joinFrequency', frequency, (frequency) => {
 			$('#radio-channel').val(frequency || '');
 		});
 	} else if (!join) {
-		sendNuiEvent('leave');
+		sendNuiEvent('leaveFrequency');
 		$('#radio-channel').val('');
 	}
 }
 
-const changeVolume = (type) => {
-	sendNuiEvent(`volume_${type}`);
-}
-
 const presetChannel = (presetId) => {
 	if (settingPreset) {
-		sendNuiEvent('preset_set', presetId);
+		sendNuiEvent('presetSet', presetId);
 		settingPreset = false;
 	} else {
-		sendNuiEvent('preset_join', presetId, (frequency) => {
+		sendNuiEvent('presetJoin', presetId, (frequency) => {
 			$('#radio-channel').val(frequency || '');
 		});
 	}
 }
 
 const setPreset = () => {
-	var frequency = $('#radio-channel').val();
+	let frequency = $('#radio-channel').val();
 	if (frequency.length) {
-		sendNuiEvent('preset_request', frequency);
+		sendNuiEvent('presetRequest', frequency);
 		settingPreset = true;
 	}
 }

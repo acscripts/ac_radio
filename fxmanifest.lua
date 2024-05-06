@@ -1,36 +1,33 @@
 fx_version 'cerulean'
 game 'gta5'
 lua54 'yes'
+use_experimental_fxv2_oal 'yes'
 
 name 'ac_radio'
-author 'ANTOND.#8507'
+author 'AC Scripts'
 version '1.2.0'
 description 'A framework-standalone radio UI for FiveM'
-repository 'https://github.com/antond15/ac_radio'
+repository 'https://github.com/acscripts/ac_radio'
 
 
-shared_scripts {
-  'config.lua',
-  'resource/locales.lua'
-}
+shared_script '@ox_lib/init.lua'
+server_script 'resource/server.lua'
+client_script 'resource/client.lua'
 
-server_scripts {
-  'resource/server/server.lua',
-  'resource/server/players.lua',
-  'resource/server/version.lua'
-}
-
-client_scripts {
-  'resource/client/utils.lua',
-  'resource/client/client.lua'
-}
 
 ui_page 'web/index.html'
 
 files {
   'web/**',
-  'locales/*.lua'
+  'config.lua',
+  'modules/client/*.lua',
+  'locales/*.json',
 }
 
+
+ox_libs {
+  'locale',
+  'math',
+}
 
 dependency 'pma-voice'
