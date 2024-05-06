@@ -7,7 +7,7 @@ return {
     useUsableItem = true,
 
     -- Enable command for opening the radio
-    useCommand = false,
+    useCommand = true,
 
     -- Default keybind for the '/radio' command
     commandKey = '',
