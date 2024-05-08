@@ -17,7 +17,7 @@ body:
       description: |
         What release version was this issue encountered on?
         Use the version number, not `latest` or similar useless stuff.
-      placeholder: v1.0.2
+      placeholder: v2.0.0
     validations:
       required: true
 
@@ -28,8 +28,9 @@ body:
       description: What framework are you getting this error on?
       options:
         - ox_core
-        - es_extended
+        - qbx_core
         - qb-core
+        - es_extended
       multiple: true
     validations:
       required: true
@@ -67,4 +68,6 @@ body:
         - label: "This issue is not a question or a feature request."
           required: true
         - label: "I have provided a **detailed** issue description and **detailed** reproduction steps."
+          required: true
+        - label: "I have read the documentation."
           required: true
