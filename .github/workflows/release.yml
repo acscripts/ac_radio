@@ -1,15 +1,14 @@
 name: Create new release
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - 'v*.*.*'
 
 jobs:
-  new-release:
-    name: Create new release
+  release:
     runs-on: ubuntu-latest
-
     steps:
       - name: Get latest code
         uses: actions/checkout@v4

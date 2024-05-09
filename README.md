@@ -2,7 +2,7 @@
 ![](https://img.shields.io/github/v/release/acscripts/ac_radio?logo=github)
 
 ## Introduction
-**AC Radio** is simple and framework-standalone UI for pma-voice.
+**AC Radio** is simple and framework-standalone radio UI for pma-voice.
 
 You can use any supported framework to enable additional features such as usable item or frequency restrictions.  
 Supported frameworks are [ox_core](https://github.com/overextended/ox_core), [qbx_core](https://github.com/Qbox-project/qbx_core), [qb-core](https://github.com/qbcore-framework/qb-core) and [es_extended](https://github.com/esx-framework/esx_core).
@@ -28,4 +28,6 @@ Report bugs using [GitHub issues](https://github.com/acscripts/ac_radio/issues).
 
 ### See the documentation [here](https://docs.acscripts.dev/radio)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/9zxbDJMhVSw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<a href="https://youtu.be/9zxbDJMhVSw">
+    <img src="https://i3.ytimg.com/vi/9zxbDJMhVSw/maxresdefault.jpg" alt="Youtube Preview" width="600">
+</a>
