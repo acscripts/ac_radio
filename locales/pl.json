@@ -1,0 +1,32 @@
+{
+  "ui": {
+    "join": "Dołącz",
+    "leave": "Wyłącz",
+    "preset_set": "Ustaw preset",
+    "preset_one": "Preset #1",
+    "preset_two": "Preset #2",
+    "volume_mute": "Wycisz",
+    "volume_up": "Zwiększ głośność",
+    "volume_down": "Zmniejsz głośność"
+  },
+
+  "command_open": "Otwórz UI radia",
+  "command_clear": "Wyczyść wszystkie ustawione presety",
+  "keymap_open": "Otwórz UI radia",
+
+  "channel_join": "Dołączono do %s MHz",
+  "channel_unavailable": "Mhz niedostępne",
+  "channel_disconnect": "Odłączyłeś się z radia",
+
+  "volume_mute": "Wyciszone",
+  "volume_unmute": "Odciszone",
+  "volume_up": "Głośność %s%%",
+  "volume_down": "Głośność %s%%",
+  "volume_max": "Maksymalna głośność",
+  "volume_min": "Minimalna głośność",
+
+  "preset_not_found": "Nie znaleziono presetów",
+  "preset_choose": "Wybierz preset (1 / 2) aby zapisac Mhz.",
+  "preset_set": "Ustawiłeś preset na %s MHz",
+  "preset_clear": "Radio wyczyszczone z persetów"
+}
