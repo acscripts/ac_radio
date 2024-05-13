@@ -1,6 +1,7 @@
 local Voice = exports['pma-voice']
 local Config = require 'config'
 local frequencyStep = 1
+local thisUserIsUnableToReadDocumentation = false
 
 local isOpened = false
 local requestedFrequency = nil
@@ -8,10 +9,23 @@ local lastVolume = nil
 
 
 
-do
+CreateThread(function()
     local step = tostring(Config.frequencyStep)
     local pos = step:find('%.')
     frequencyStep = pos and #step:sub(pos + 1) or 0
+
+    -- Check if server has correct version of pma-voice because certain users are special and can't read documentation.
+    -- This is the only way because the is no version variable in pma-voice and the latest release is too outdated.
+    local volume = Voice:getRadioVolume()
+    if volume > 0 and volume < 1 then
+        thisUserIsUnableToReadDocumentation = true
+    end
+end)
+
+---@return number
+local function getRadioVolume()
+    local volume = Voice:getRadioVolume()
+    return thisUserIsUnableToReadDocumentation and volume * 100 or volume
 end
 
 
@@ -130,7 +144,7 @@ end)
 RegisterNUICallback('volumeUp', function(_, cb)
     cb(1)
 
-    local currentVolume = lastVolume or Voice:getRadioVolume()
+    local currentVolume = lastVolume or getRadioVolume()
 
     if lastVolume then
         lastVolume = nil
@@ -164,7 +178,7 @@ end)
 RegisterNUICallback('volumeDown', function(_, cb)
     cb(1)
 
-    local currentVolume = lastVolume or Voice:getRadioVolume()
+    local currentVolume = lastVolume or getRadioVolume()
 
     if lastVolume then
         lastVolume = nil
@@ -208,7 +222,7 @@ RegisterNUICallback('volumeMute', function(_, cb)
             icon = 'volume-high',
         })
     else
-        lastVolume = Voice:getRadioVolume()
+        lastVolume = getRadioVolume()
         Voice:setRadioVolume(0)
 
         lib.notify({
