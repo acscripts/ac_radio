@@ -5,7 +5,7 @@ use_experimental_fxv2_oal 'yes'
 
 name 'ac_radio'
 author 'AC Scripts'
-version '2.0.0'
+version '2.0.1'
 description 'A framework-standalone radio UI for FiveM'
 repository 'https://github.com/acscripts/ac_radio'
 
