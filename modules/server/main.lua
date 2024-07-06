@@ -18,5 +18,7 @@ SetTimeout(0, function()
         require 'modules.server.framework.esx'
     elseif Utils.hasExport('qb-core.GetCoreObject') then
         require 'modules.server.framework.qb'
+    else
+        require 'modules.server.framework.aceperms'
     end
 end)
