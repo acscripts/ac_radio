@@ -28,5 +28,7 @@
   "preset_not_found": "Nie znaleziono presetów",
   "preset_choose": "Wybierz preset (1 / 2) aby zapisac Mhz.",
   "preset_set": "Ustawiłeś preset na %s MHz",
-  "preset_clear": "Radio wyczyszczone z persetów"
+  "preset_clear": "Radio wyczyszczone z persetów",
+
+  "no_item": "Nie masz radia"
 }
