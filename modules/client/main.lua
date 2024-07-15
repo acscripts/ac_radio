@@ -31,6 +31,18 @@ end
 
 
 local function openRadio()
+    
+    if Config.checkitem then
+    local count = exports.ox_inventory:Search('count', 'radio')
+        if not (count > 0) then
+            lib.notify({
+                type = 'error',
+                description = locale('no_item'),
+            })
+            return 0 
+        end
+    end
+    
     if isOpened then return end
     isOpened = true
 
