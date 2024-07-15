@@ -6,6 +6,9 @@ return {
     -- Enable usable item for opening the radio
     useUsableItem = true,
 
+    --Checks if the player has a radio in eq
+	checkitem = true,
+
     -- Enable command for opening the radio
     useCommand = true,
 
