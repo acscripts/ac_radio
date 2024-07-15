@@ -28,5 +28,7 @@
   "preset_not_found": "No saved preset found",
   "preset_choose": "Choose a preset (1 or 2) to save the current frequency on.",
   "preset_set": "You've set the preset to %s MHz",
-  "preset_clear": "Radio presets cleared"
+  "preset_clear": "Radio presets cleared",
+
+  "no_item": "You don't have a radio"
 }
