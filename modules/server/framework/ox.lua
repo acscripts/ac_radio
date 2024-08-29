@@ -13,7 +13,7 @@ AddEventHandler('ox:playerLogout', function(playerId)
     Player(playerId).state:set('ac:hasRadioProp', false, true)
 end)
 
-CreateThread(function()
+Citizen.CreateThread(function()
     for frequency, allowed in pairs(Config.restrictedChannels) do
         Voice:addChannelCheck(tonumber(frequency), function(playerId)
             local player = Ox.GetPlayer(playerId)

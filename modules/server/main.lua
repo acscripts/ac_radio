@@ -11,14 +11,14 @@ SetConvarReplicated('voice_enableSubmix', Config.radioEffect and '1' or '0')
 SetConvarReplicated('voice_enableRadioAnim', Config.radioAnimation and '1' or '0')
 SetConvarReplicated('voice_defaultRadio', Config.radioTalkKey)
 
-SetTimeout(0, function()
+Citizen.SetTimeout(0, function()
     if Utils.hasExport('ox_core.GetPlayer') then
         require 'modules.server.framework.ox'
     elseif Utils.hasExport('es_extended.getSharedObject') then
         require 'modules.server.framework.esx'
     elseif Utils.hasExport('qb-core.GetCoreObject') then
         require 'modules.server.framework.qb'
-    else
-        require 'modules.server.framework.aceperms'
     end
+
+    require 'modules.server.framework.aceperms'
 end)

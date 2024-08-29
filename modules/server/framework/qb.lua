@@ -12,7 +12,7 @@ AddEventHandler('QBCore:Server:OnPlayerUnload', function(playerId)
     Player(playerId).state:set('ac:hasRadioProp', false, true)
 end)
 
-CreateThread(function()
+Citizen.CreateThread(function()
     if Config.useUsableItem and not Utils.hasExport('ox_inventory.Items') then
         QB.Functions.CreateUseableItem('radio', function(playerId)
             TriggerClientEvent('ac_radio:openRadio', playerId)
