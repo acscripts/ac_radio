@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,600&display=swap');
 @font-face {
     font-family: 'Technology';
     src: url('assets/technology.ttf');
@@ -48,7 +48,7 @@
     border-radius: 5px;
     color: #21381e;
     font-family: 'Technology';
-    font-size: 2rem;
+    font-size: 3vh;
 }
 
 .channel-input input::placeholder {
@@ -134,7 +134,7 @@
     transition: all .3s;
     padding: 10%;
     border-radius: 3px;
-    font-family: 'Rubik', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 600;
     font-size: .8rem;
     color: #2d2427;
