@@ -5,7 +5,7 @@
 **AC Radio** is simple and framework-standalone radio UI for pma-voice.
 
 You can use any supported framework to enable additional features such as usable item or frequency restrictions.  
-Supported frameworks are [ox_core](https://github.com/overextended/ox_core), [qbx_core](https://github.com/Qbox-project/qbx_core), [qb-core](https://github.com/qbcore-framework/qb-core) and [es_extended](https://github.com/esx-framework/esx_core).
+Supported frameworks are [ox_core](https://github.com/communityox/ox_core), [qbx_core](https://github.com/Qbox-project/qbx_core), [qb-core](https://github.com/qbcore-framework/qb-core) and [es_extended](https://github.com/esx-framework/esx_core).
 
 Report bugs using [GitHub issues](https://github.com/acscripts/ac_radio/issues). Use the official [Discord server](https://discord.gg/2ZezMw2xvR) for support.
 
@@ -13,7 +13,7 @@ Report bugs using [GitHub issues](https://github.com/acscripts/ac_radio/issues).
 - Two available frequency presets customisable by player
 - Frequency restrictions for groups/jobs
 - Configurable frequency limit and decimal precision
-- Usable item for [ox_inventory](https://github.com/overextended/ox_inventory) and any ESX/QB inventory
+- Usable item for [ox_inventory](https://github.com/communityox/ox_inventory) and any ESX/QB inventory
 - Choose whether to use command and/or usable item for opening the UI
 - Tooltips for individual buttons on the radio
 - Buttons for complete volume control (up, down, mute)
@@ -22,7 +22,7 @@ Report bugs using [GitHub issues](https://github.com/acscripts/ac_radio/issues).
 
 ## Dependencies
 - [pma-voice](https://github.com/AvarianKnight/pma-voice)
-- [ox_lib](https://github.com/overextended/ox_lib)
+- [ox_lib](https://github.com/communityox/ox_lib)
 
 ---
 
