@@ -35,24 +35,24 @@ end
 
 
 ---@param bagName string
----@return number? playerPed
 ---@return number? serverId
-local function getPedFromStateBagName(bagName)
+---@return number? playerPed
+local function getPlayerFromStateBagName(bagName)
     local playerId = GetPlayerFromStateBagName(bagName)
-    if not playerId then return end
+    if not playerId or playerId == 0 then return end
 
     if playerId == cache.playerId then
-        return cache.ped, cache.serverId
+        return cache.serverId, cache.ped
     end
 
     local playerPed = lib.waitFor(function()
+        if not NetworkIsPlayerActive(playerId) then return false end
+
         local ped = GetPlayerPed(playerId)
         if ped > 0 then return ped end
     end, ("player '%s' did not exist in time"):format(playerId), 10000)
 
-    Wait(0)
-
-    return playerPed, GetPlayerServerId(playerId)
+    return GetPlayerServerId(playerId), playerPed
 end
 
 
@@ -63,8 +63,8 @@ end
 AddStateBagChangeHandler('ac:hasRadioProp', '', function(bagName, _, value, _, replicated)
     if replicated then return end
 
-    local playerPed, serverId = getPedFromStateBagName(bagName)
-    if not playerPed or not serverId then return end
+    local serverId, playerPed = getPlayerFromStateBagName(bagName)
+    if not serverId or not playerPed then return end
 
     if value then
         createRadioProp(playerPed, serverId)
