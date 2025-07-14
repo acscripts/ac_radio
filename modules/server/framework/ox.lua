@@ -1,4 +1,4 @@
-if not lib.checkDependency('ox_core', '0.25.0', true) then return end
+if not lib.checkDependency('ox_core', '1.5.7', true) then return end
 
 local Ox <const> = require '@ox_core.lib.init' --[[ @as OxServer ]]
 local Voice <const> = exports['pma-voice']
