@@ -17,21 +17,16 @@ CreateThread(function()
     for frequency, allowed in pairs(Config.restrictedChannels) do
         Voice:addChannelCheck(tonumber(frequency), function(playerId)
             local player = Ox.GetPlayer(playerId)
-            if not player or not player.charId then return false end
+            if not player?.charId then return false end
 
             local isAllowed = player.getGroup(allowed) ~= nil
 
-            if isAllowed then
-                lib.notify(playerId, {
-                    type = 'success',
-                    description = locale('channel_join', frequency + 0.0),
-                })
-            else
-                lib.notify(playerId, {
-                    type = 'error',
-                    description = locale('channel_unavailable'),
-                })
-            end
+            lib.notify(playerId, {
+                type = isAllowed and 'success' or 'error',
+                description = isAllowed and locale('channel_join', frequency + 0.0) or locale('channel_unavailable'),
+            })
+
+            return isAllowed
         end)
     end
 end)
