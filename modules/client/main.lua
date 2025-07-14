@@ -36,8 +36,7 @@ local function openRadio()
     isOpened = true
 
     TriggerEvent('ox_inventory:disarm', true)
-
-    LocalPlayer.state:set('ac:hasRadioProp', true, true)
+    TriggerServerEvent('ac_radio:setRadioProp', true)
 
     local animDict = cache.vehicle and 'cellphone@in_car@ds' or 'cellphone@'
     lib.playAnim(cache.ped, animDict, 'cellphone_text_in', 4.0, 4.0, -1, 50)
@@ -68,7 +67,7 @@ local function openRadio()
     Wait(200)
     StopAnimTask(cache.ped, animDict, 'cellphone_text_out', 1.0)
 
-    LocalPlayer.state:set('ac:hasRadioProp', false, true)
+    TriggerServerEvent('ac_radio:setRadioProp', false)
 end
 
 

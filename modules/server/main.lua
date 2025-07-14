@@ -20,3 +20,12 @@ SetTimeout(0, function()
         require 'modules.server.framework.qb'
     end
 end)
+
+---@param state boolean
+RegisterNetEvent('ac_radio:setRadioProp', function(state)
+    local playerId = source
+
+    if type(state) ~= 'boolean' then return end
+
+    Player(playerId).state:set('ac:hasRadioProp', state, true)
+end)
