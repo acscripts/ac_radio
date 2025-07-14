@@ -1,7 +1,7 @@
-local Config = require 'config'
-local Utils = require 'modules.server.utils'
-local QB = exports['qb-core']:GetCoreObject()
-local Voice = exports['pma-voice']
+local Config <const> = require 'config'
+local Utils <const> = require 'modules.server.utils'
+local QB <const> = exports['qb-core']:GetCoreObject()
+local Voice <const> = exports['pma-voice']
 
 AddEventHandler('QBCore:Server:PlayerLoaded', function(player)
     Voice:setPlayerRadio(player.PlayerData.source, 0)

@@ -1,5 +1,6 @@
-local Voice = exports['pma-voice']
-local Config = require 'config'
+local Voice <const> = exports['pma-voice']
+local Config <const> = require 'config'
+
 local frequencyStep = 1
 local thisUserIsUnableToReadDocumentation = false
 

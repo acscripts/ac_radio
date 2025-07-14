@@ -1,7 +1,7 @@
-local Config = require 'config'
-local Utils = require 'modules.server.utils'
-local ESX = exports.es_extended:getSharedObject()
-local Voice = exports['pma-voice']
+local Config <const> = require 'config'
+local Utils <const> = require 'modules.server.utils'
+local ESX <const> = exports.es_extended:getSharedObject()
+local Voice <const> = exports['pma-voice']
 
 AddEventHandler('esx:playerLoaded', function(playerId)
     Voice:setPlayerRadio(playerId, 0)

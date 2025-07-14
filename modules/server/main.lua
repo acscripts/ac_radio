@@ -1,5 +1,5 @@
-local Config = require 'config'
-local Utils = require 'modules.server.utils'
+local Config <const> = require 'config'
+local Utils <const> = require 'modules.server.utils'
 
 lib.versionCheck('acscripts/ac_radio')
 

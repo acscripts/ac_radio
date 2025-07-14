@@ -1,8 +1,8 @@
 if not lib.checkDependency('ox_core', '0.25.0', true) then return end
 
-local Ox = require '@ox_core.lib.init' --[[ @as OxServer ]]
-local Voice = exports['pma-voice']
-local Config = require 'config'
+local Ox <const> = require '@ox_core.lib.init' --[[ @as OxServer ]]
+local Voice <const> = exports['pma-voice']
+local Config <const> = require 'config'
 
 AddEventHandler('ox:playerLoaded', function(playerId)
     Voice:setPlayerRadio(playerId, 0)

@@ -1,4 +1,4 @@
-local Config = require 'config'
+local Config <const> = require 'config'
 
 
 
