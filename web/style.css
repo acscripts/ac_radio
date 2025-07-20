@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,600&display=swap');
 @font-face {
-    font-family: 'Technology';
-    src: url('assets/technology.ttf');
+    font-family: 'Digital-7';
+    src: url('assets/digital-7.ttf');
 }
 
 
@@ -47,7 +47,7 @@
     background: #8b9c60;
     border-radius: 5px;
     color: #21381e;
-    font-family: 'Technology';
+    font-family: 'Digital-7';
     font-size: 3vh;
 }
 
